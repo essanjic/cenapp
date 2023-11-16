@@ -1,4 +1,4 @@
-package com.group6.cenapp.model;
+package com.group6.cenapp.model.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

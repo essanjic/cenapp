@@ -1,4 +1,4 @@
-package com.group6.cenapp.model;
+package com.group6.cenapp.model.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +25,9 @@ public class Role implements Serializable {
     @OneToMany
     private List<User> users;
 
+    public Integer getId() {
+        return idRole;
+    }
 }
 
 

@@ -1,4 +1,4 @@
-package com.group6.cenapp.model;
+package com.group6.cenapp.model.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -68,8 +68,6 @@ public class Restaurant implements Serializable {
     @JoinColumn(name = "city_id", nullable = false, foreignKey = @ForeignKey(name = "FK_restaurant_city"))
     private City idCity;
     private String image;
-
-
 
 
 }

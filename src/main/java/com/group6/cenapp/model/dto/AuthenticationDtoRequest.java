@@ -22,4 +22,5 @@ public class AuthenticationDtoRequest {
         this.password = password;
     }
 
+
 }

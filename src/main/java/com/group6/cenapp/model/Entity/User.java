@@ -1,4 +1,4 @@
-package com.group6.cenapp.model;
+package com.group6.cenapp.model.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +14,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @Column(name="user_id", nullable = false)
-    private Integer idUser;
+    private int idUser;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -24,9 +24,19 @@ public class User {
     private String password;
     @Column(nullable = false, columnDefinition = "TINYINT")
     private Boolean enabled;
-    private Integer idCity;
+    @ManyToOne
+    @JoinColumn(name = "id_city", nullable = false, foreignKey = @ForeignKey(name = "FK_user_city"))
+    private City idCity;
     @ManyToOne
     @JoinColumn(name = "id_role", nullable = false, foreignKey = @ForeignKey(name = "FK_user_role"))
     private Role idRole;
     private String image;
+
+    public int getId() {
+        return idUser;
+    }
+
+    public Role getRole() {
+        return idRole;
+    }
 }

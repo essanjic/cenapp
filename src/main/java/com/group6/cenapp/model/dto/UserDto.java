@@ -1,7 +1,8 @@
 package com.group6.cenapp.model.dto;
 
-import com.group6.cenapp.model.City;
-import com.group6.cenapp.model.Role;
+import com.group6.cenapp.model.Entity.City;
+import com.group6.cenapp.model.Entity.Role;
+import com.group6.cenapp.model.Entity.User;
 import lombok.*;
 
 
@@ -21,4 +22,17 @@ public class UserDto {
     private String image;
 
 
+    public void setRole(Role roleUser) {
+    }
+
+    public void setPassword(String encode) {
+    }
+
+    public CharSequence getPassword() {
+        return null;
+    }
+
+    public User getRole() {
+        return null;
+    }
 }
