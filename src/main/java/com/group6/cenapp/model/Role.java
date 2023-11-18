@@ -1,9 +1,6 @@
 package com.group6.cenapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,10 +14,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "role")
 public class Role implements Serializable {
+    @Getter
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Integer idRole;
+    @Column(name = "id", nullable = false, unique = true, length = 100)
+    private int id;
     private String name;
     @OneToMany
     private List<User> users;

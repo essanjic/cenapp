@@ -3,30 +3,44 @@ package com.group6.cenapp.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Entity
+@AllArgsConstructor
 @Table(name = "user")
 public class User {
-    @Id
+
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column(name="user_id", nullable = false)
-    private Integer idUser;
+    @Column(name = "id", nullable = false)
+    @Getter
+    @Id
+    private Long id;
+    @Getter
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
+    @Getter
     private String lastName;
     @Column(unique = true, nullable = false)
+    @Getter
     private String email;
+    @Setter
+    @Getter
     private String password;
-    @Column(nullable = false, columnDefinition = "TINYINT")
+    @Column(nullable = true, columnDefinition = "TINYINT")
     private Boolean enabled;
-    private Integer idCity;
+    @ManyToOne
+    @JoinColumn(name = "id_city", nullable = false, foreignKey = @ForeignKey(name = "FK_user_city"))
+    @Getter
+    private City idCity;
     @ManyToOne
     @JoinColumn(name = "id_role", nullable = false, foreignKey = @ForeignKey(name = "FK_user_role"))
+    @Getter
+    @Setter
     private Role idRole;
-    private String image;
+    @OneToOne
+    @JoinColumn(name = "image_id", foreignKey = @ForeignKey(name = "FK_user_image"))
+    @Getter
+    private Image image;
 }

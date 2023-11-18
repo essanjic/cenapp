@@ -1,15 +1,14 @@
 package com.group6.cenapp.model.dto;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-public class AuthenticationDtoRequest {
+public class AuthRequest {
+
     private String email;
     private String password;
-
 
 }

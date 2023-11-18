@@ -14,16 +14,16 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
-@RequestMapping("/v1/api/users")
-public class UserController {
+@RequestMapping("/v1/api/admin")
+public class AdministratorController {
 
 
     @Autowired
     private UserService userService;
 
-    public UserController(UserService userService) {
+    public AdministratorController(UserService userService) {
         this.userService = userService;
     }
 
@@ -66,3 +66,4 @@ public class UserController {
         }
     }
 }
+
