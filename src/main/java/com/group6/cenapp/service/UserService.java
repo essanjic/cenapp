@@ -10,19 +10,20 @@ import com.group6.cenapp.repository.RoleRepository;
 import com.group6.cenapp.repository.UserRepository;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @NoArgsConstructor
 
-public class UserService implements com.group6.cenapp.service.implement.UserDetails {
+public class UserService implements UserDetails {
 
     @Autowired
     private UserRepository userRepository;
@@ -81,12 +82,6 @@ public class UserService implements com.group6.cenapp.service.implement.UserDeta
         }
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> userDetail = userRepository.findByEmail(email);
-        return (UserDetails) userDetail.orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
-    }
-
 
 
     public int idUser(String email) {
@@ -109,7 +104,7 @@ public class UserService implements com.group6.cenapp.service.implement.UserDeta
         return (lastName);
     }
 
-    @Override
+
     public String emailUser(String email) {
         User user = userRepository.findByEmail(email).get();
         return (user.getEmail());
@@ -132,5 +127,40 @@ public class UserService implements com.group6.cenapp.service.implement.UserDeta
         User user = userRepository.findByEmail(email).get();
         Image image = user.getImage();
         return (image);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

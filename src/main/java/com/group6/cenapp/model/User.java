@@ -43,4 +43,5 @@ public class User {
     @JoinColumn(name = "image_id", foreignKey = @ForeignKey(name = "FK_user_image"))
     @Getter
     private Image image;
+
 }
