@@ -8,7 +8,9 @@ import com.group6.cenapp.model.User;
 import com.group6.cenapp.model.dto.UserDto;
 import com.group6.cenapp.repository.RoleRepository;
 import com.group6.cenapp.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +24,7 @@ import java.util.Optional;
 
 @Service
 @NoArgsConstructor
-
+@AllArgsConstructor
 public class UserService implements UserDetails {
 
     @Autowired
@@ -31,8 +33,8 @@ public class UserService implements UserDetails {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    //@Autowired
+    //private PasswordEncoder passwordEncoder;
 
     @Autowired
     ObjectMapper mapper;
@@ -40,7 +42,7 @@ public class UserService implements UserDetails {
     public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
+        //this.passwordEncoder = passwordEncoder;
     }
     public List<UserDto> getAllUsers() {
         List<User> allUsers = userRepository.findAll();
@@ -54,7 +56,7 @@ public class UserService implements UserDetails {
     //@Override
     public Optional<User> getUserById(Integer id) { return userRepository.findById(id);}
 
-    public User saveUser(UserDto userDto) throws DuplicatedValueException {
+    public User saveUser(@NotNull UserDto userDto) throws DuplicatedValueException {
 
         Optional<User> existUser = userRepository.findByEmail(userDto.getEmail());
         if(existUser.isPresent()) {
@@ -63,7 +65,7 @@ public class UserService implements UserDetails {
 
         Role roleUser = roleRepository.findById(Math.toIntExact(userDto.getIdRole().getId())).get();
         userDto.setIdRole(roleUser);
-        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        //userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User user = mapper.convertValue(userDto, User.class);
         return userRepository.save(user);
     }
