@@ -20,7 +20,7 @@ public class Restaurant implements Serializable {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @Column(name="restaurant_id", nullable = false, unique = true)
-    private Integer idRestaurant;
+    private Integer id_restaurant;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -28,9 +28,9 @@ public class Restaurant implements Serializable {
     private String phone;
     private String description;
     @Column(name ="short_description" ,length = 50)
-    private String shortDescription;
+    private String short_description;
     @Column(name = "zone/street")
-    private String zoneStreet;
+    private String zone_street;
 
     private Double rating;
 
@@ -39,10 +39,10 @@ public class Restaurant implements Serializable {
     @ElementCollection
     @CollectionTable(name = "restaurant_day_disponibility", joinColumns = @JoinColumn(name = "restaurant_id"))
     @Column(name = "day_disponibility")
-    private List<String> dayDisponibility;
+    private List<String> day_disponibility;
     private boolean parking;
     @Column(name = "live_music")
-    private boolean liveMusic;
+    private boolean live_music;
 
     private boolean terrace;
 
@@ -52,20 +52,20 @@ public class Restaurant implements Serializable {
 
     private String area;
     @Column(name = "average_score")
-    private Double averageScore;
+    private Double average_score;
 
     private String latitude;
 
     private String longitude;
     @Column(name = "cancelation_policy")
-    private String cancelationPolicy;
+    private String cancelation_policy;
     @Column(name = "hse_policy")
-    private String hsePolicy;
+    private String hse_policy;
     @Column(name = "site_policy")
-    private String sitePolicy;
+    private String site_policy;
     @ManyToOne
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "FK_restaurant_category"))
-    private Category idCategory;
+    private Category category_id;
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false, foreignKey = @ForeignKey(name = "FK_restaurant_city"))
     private City idCity;

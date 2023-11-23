@@ -15,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "city")
 public class City implements Serializable {
     @Id
     @Column(name="city_id", nullable = false, unique = true, length = 100)

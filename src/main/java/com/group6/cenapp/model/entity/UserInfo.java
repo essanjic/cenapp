@@ -9,6 +9,7 @@ import lombok.NonNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "user_info")
 public class UserInfo {
 
     @Id

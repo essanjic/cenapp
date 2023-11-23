@@ -56,11 +56,11 @@ public class RestaurantController {
 
     @PutMapping("/update")
     public ResponseEntity<?> editRestaurant(@RequestBody Restaurant restaurant) throws Exception{
-        Optional<Restaurant> productoBuscado = restaurantService.getRestaurantById(restaurant.getIdRestaurant());
+        Optional<Restaurant> productoBuscado = restaurantService.getRestaurantById(restaurant.getId_restaurant());
         if(productoBuscado.isPresent()){
             return ResponseEntity.ok(restaurantService.updateRestaurant(restaurant));
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El restaurante con ID: " + restaurant.getIdRestaurant() + " no se encuentra ");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El restaurante con ID: " + restaurant.getId_restaurant() + " no se encuentra ");
         }
 
     }
