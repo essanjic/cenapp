@@ -1,5 +1,6 @@
 package com.group6.cenapp.model.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,9 +27,11 @@ public class User {
     private Boolean enabled;
     @ManyToOne
     @JoinColumn(name = "id_city", nullable = false, foreignKey = @ForeignKey(name = "FK_user_city"))
+    @JsonIgnore
     private City idCity;
     @ManyToOne
     @JoinColumn(name = "id_role", nullable = false, foreignKey = @ForeignKey(name = "FK_user_role"))
+    @JsonIgnore
     private Role idRole;
     private String image;
 
