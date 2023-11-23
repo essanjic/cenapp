@@ -14,16 +14,20 @@ public class Category {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @Column(name = "category_id", nullable = false, unique = true)
-    private Integer category_id;
+    private Integer category;
 
     @Column(nullable = false, length = 50)
     private String name;
 
     private String description;
     @Column(name = "short_description", length = 50)
-    private String Short_description;
+    private String short_description;
     @Column(name = "food_type", length = 200)
     private String food_type;
 
     private String image;
+
+    public Category(Integer category) {
+        this.category = category;
+    }
 }

@@ -1,5 +1,6 @@
 package com.group6.cenapp.repository;
 
+import com.group6.cenapp.model.entity.Category;
 import com.group6.cenapp.model.entity.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
-
+    List<Restaurant> getByCategory(Category category);
     @Query(value = "select R.* from city R where R.city_id = ?1", nativeQuery = true)
     List<Restaurant> getByCity(Integer city_id);
     @Query(value = "select P.* from restaurant P where P.id not in (select distinct R.restaurant from reservation R where (R.checkout_date >= ?1 and R.check_in_date <= ?2));", nativeQuery = true)

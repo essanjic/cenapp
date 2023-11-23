@@ -1,5 +1,6 @@
 package com.group6.cenapp.service;
 
+import com.group6.cenapp.model.entity.Category;
 import com.group6.cenapp.model.entity.Restaurant;
 import com.group6.cenapp.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,10 @@ public class RestaurantService {
         return restaurantRepository.findAll();
     }
 
-    /*public List<Restaurant>getRestaurantByCategory(Category id){
-        return restaurantRepository.get(id);
-    };*/
+    public List<Restaurant> getRestaurantByCategory(Category category) {
+        return restaurantRepository.getByCategory(category);
+    }
+
 
 
     public Optional<Restaurant> getRestaurantById(Integer id) {

@@ -30,7 +30,7 @@ public class RestaurantController {
     private CategoryRepository categoryRepository;
 
     @GetMapping
-    public ResponseEntity<List<Restaurant>> listRestaurant(){
+    public ResponseEntity<List<Restaurant>> listRestaurant() {
         return ResponseEntity.ok(restaurantService.getAllRestaurants());
     }
 
@@ -43,23 +43,25 @@ public class RestaurantController {
         return ApiResponseHandler.generateResponseError("Restaurant "+ id + " not found", HttpStatus.NOT_FOUND);
     }
 
-    /*@GetMapping("/category/{id}")
-    public ResponseEntity<List<Restaurant>> searchRestaurantByCategory(@PathVariable Category id) {
-        List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCategory(id);
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<Restaurant>> searchRestaurantByCategory(@PathVariable Category category) {
+        List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCategory(category);
          if(!restaurantSearches.isEmpty()){
             return ResponseEntity.ok(restaurantSearches);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-    }*/
+    }
 
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant, @RequestParam(required = false) Integer categoryId){
-        if (categoryId == null) {
-            // Manejar el caso en que el parámetro categoryId no está presente
+    public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) {
+        if (restaurant.getCategory() == null || restaurant.getCategory().getCategory() == null) {
+            // Manejar el caso en que la categoría no está presente en el cuerpo de la solicitud
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
+
+        Integer categoryId = restaurant.getCategory().getCategory();
 
         // Obtener la categoría existente por su ID
         Category existingCategory = categoryRepository.findById(categoryId).orElse(null);
@@ -70,7 +72,7 @@ public class RestaurantController {
         }
 
         // Asociar la categoría existente al restaurante
-        restaurant.setCategory_id(existingCategory);
+        restaurant.setCategory(existingCategory);
 
         // Guardar el restaurante
         Restaurant savedRestaurant = restaurantService.saveRestaurant(restaurant);
