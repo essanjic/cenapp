@@ -1,7 +1,9 @@
 package com.group6.cenapp.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.group6.cenapp.model.entity.Category;
 import com.group6.cenapp.model.entity.Restaurant;
+import com.group6.cenapp.repository.CategoryRepository;
 import com.group6.cenapp.response.ApiResponseHandler;
 import com.group6.cenapp.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantService restaurantService;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping
     public ResponseEntity<List<Restaurant>> listRestaurant(){
@@ -50,9 +55,29 @@ public class RestaurantController {
 
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant){
-        return ResponseEntity.ok(restaurantService.saveRestaurant(restaurant));
+    public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant, @RequestParam(required = false) Integer categoryId){
+        if (categoryId == null) {
+            // Manejar el caso en que el parámetro categoryId no está presente
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        // Obtener la categoría existente por su ID
+        Category existingCategory = categoryRepository.findById(categoryId).orElse(null);
+
+        if (existingCategory == null) {
+            // Manejar el caso donde la categoría no se encuentra
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        // Asociar la categoría existente al restaurante
+        restaurant.setCategory_id(existingCategory);
+
+        // Guardar el restaurante
+        Restaurant savedRestaurant = restaurantService.saveRestaurant(restaurant);
+
+        return ResponseEntity.ok(savedRestaurant);
     }
+
 
     @PutMapping("/update")
     public ResponseEntity<?> editRestaurant(@RequestBody Restaurant restaurant) throws Exception{

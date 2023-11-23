@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -38,8 +38,11 @@ public class Restaurant implements Serializable {
     private String email;
     @ElementCollection
     @CollectionTable(name = "restaurant_day_disponibility", joinColumns = @JoinColumn(name = "restaurant_id"))
-    @Column(name = "day_disponibility")
-    private List<String> day_disponibility;
+    @MapKeyColumn(name = "day_of_week")
+    @AttributeOverride(name = "openHour", column = @Column(name = "open_hour"))
+    @AttributeOverride(name = "closeHour", column = @Column(name = "close_hour"))
+    @MapKeyEnumerated(EnumType.STRING)
+    private Map<DayOfWeek, DailyAvailability> dayDisponibility;
     private boolean parking;
     @Column(name = "live_music")
     private boolean live_music;
