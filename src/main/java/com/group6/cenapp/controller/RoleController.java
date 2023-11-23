@@ -1,9 +1,8 @@
 package com.group6.cenapp.controller;
 
+import com.group6.cenapp.model.Entity.Role;
 import com.group6.cenapp.response.ApiResponseHandler;
 import com.group6.cenapp.service.RoleService;
-import com.group6.cenapp.model.Entity.Role;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Api(tags="Roles")
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/v1/api/roles")
