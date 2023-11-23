@@ -1,6 +1,6 @@
 package com.group6.cenapp.service;
 
-import com.group6.cenapp.model.Entity.UserInfo;
+import com.group6.cenapp.model.entity.UserInfo;
 import com.group6.cenapp.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

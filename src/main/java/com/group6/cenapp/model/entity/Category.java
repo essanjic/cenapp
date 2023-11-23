@@ -1,4 +1,4 @@
-package com.group6.cenapp.model.Entity;
+package com.group6.cenapp.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,14 +17,16 @@ import lombok.Setter;
 public class Category {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @Column(name = "category_id", nullable = false, unique = true)
     private Integer idCategory;
 
+    @Column(nullable = false, length = 50)
     private String name;
 
     private String description;
-    @Column(length = 50)
+    @Column(name = "short_description", length = 50)
     private String ShortDescription;
-
+    @Column(name = "food_type", length = 200)
     private String foodType;
 
     private String image;

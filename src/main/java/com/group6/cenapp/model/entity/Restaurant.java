@@ -1,5 +1,6 @@
-package com.group6.cenapp.model.Entity;
+package com.group6.cenapp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,22 +26,22 @@ public class Restaurant implements Serializable {
     @Column(nullable = false)
     private String address;
     private String phone;
-    private String email;
     private String description;
-    @Column(length = 50)
+    @Column(name ="short_description" ,length = 50)
     private String shortDescription;
+    @Column(name = "zone/street")
     private String zoneStreet;
 
     private Double rating;
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_restaurant_user"))
-    private User emailUser;
+
+    @Column(name = "email_restaurant")
+    private String email;
     @ElementCollection
     @CollectionTable(name = "restaurant_day_disponibility", joinColumns = @JoinColumn(name = "restaurant_id"))
     @Column(name = "day_disponibility")
     private List<String> dayDisponibility;
     private boolean parking;
-
+    @Column(name = "live_music")
     private boolean liveMusic;
 
     private boolean terrace;
@@ -50,16 +51,17 @@ public class Restaurant implements Serializable {
     private boolean active;
 
     private String area;
-
+    @Column(name = "average_score")
     private Double averageScore;
 
     private String latitude;
 
     private String longitude;
-
+    @Column(name = "cancelation_policy")
     private String cancelationPolicy;
-
+    @Column(name = "hse_policy")
     private String hsePolicy;
+    @Column(name = "site_policy")
     private String sitePolicy;
     @ManyToOne
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "FK_restaurant_category"))
@@ -69,5 +71,15 @@ public class Restaurant implements Serializable {
     private City idCity;
     private String image;
 
+    @Transient
+    @JsonProperty("city_id")
+    private Integer cityId;
 
+    @PrePersist
+    public void prePersist() {
+        if (cityId != null) {
+            idCity = new City();
+            idCity.setIdCity(cityId);
+        }
+    }
 }

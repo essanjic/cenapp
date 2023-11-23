@@ -1,6 +1,6 @@
 package com.group6.cenapp.service;
 
-import com.group6.cenapp.model.Entity.UserInfo;
+import com.group6.cenapp.model.entity.UserInfo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

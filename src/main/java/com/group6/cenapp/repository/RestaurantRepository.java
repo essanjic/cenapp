@@ -1,6 +1,6 @@
 package com.group6.cenapp.repository;
 
-import com.group6.cenapp.model.Entity.Restaurant;
+import com.group6.cenapp.model.entity.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
 
+    @Query(value = "select R.* from city R where R.city_id = ?1", nativeQuery = true)
+    List<Restaurant> getByCity(Integer city_id);
     @Query(value = "select P.* from restaurant P where P.id not in (select distinct R.restaurant from reservation R where (R.checkout_date >= ?1 and R.check_in_date <= ?2));", nativeQuery = true)
     List<Restaurant> getByRangeDate(LocalDate check_in_date, LocalDate check_out_date);
 
@@ -18,4 +20,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     List<Restaurant> getByCityAndRangeDate(Integer city_id, LocalDate check_in_date, LocalDate check_out_date);
     @Query(value = "SELECT * FROM restaurant ORDER BY RAND() LIMIT 6", nativeQuery = true)
     List<Restaurant> getRandomRestaurant();
+
 }

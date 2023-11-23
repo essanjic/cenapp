@@ -1,7 +1,7 @@
 package com.group6.cenapp.controller;
 
-import com.group6.cenapp.model.Entity.AuthRequest;
-import com.group6.cenapp.model.Entity.UserInfo;
+import com.group6.cenapp.model.entity.AuthRequest;
+import com.group6.cenapp.model.entity.UserInfo;
 import com.group6.cenapp.service.JwtService;
 import com.group6.cenapp.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;

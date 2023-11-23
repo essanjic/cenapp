@@ -1,6 +1,7 @@
-package com.group6.cenapp.model.Entity;
+package com.group6.cenapp.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,9 +22,12 @@ public class City implements Serializable {
     private Integer idCity;
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false, foreignKey = @ForeignKey(name = "FK_city_country"))
+    @JsonIgnore
     private Country idCountry;
     @Column(nullable = false, length = 100)
+    @JsonIgnore
     private String name;
+    @JsonIgnore
     private String abbreviation;
 
 }

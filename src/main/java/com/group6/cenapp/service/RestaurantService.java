@@ -1,6 +1,6 @@
 package com.group6.cenapp.service;
 
-import com.group6.cenapp.model.Entity.Restaurant;
+import com.group6.cenapp.model.entity.Restaurant;
 import com.group6.cenapp.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,16 @@ import java.util.Optional;
 @Service
 public class RestaurantService {
     @Autowired
-    private static RestaurantRepository restaurantRepository;
+    private RestaurantRepository restaurantRepository;
 
 
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
     }
+
+    /*public List<Restaurant>getRestaurantByCategory(Category id){
+        return restaurantRepository.get(id);
+    };*/
 
 
     public Optional<Restaurant> getRestaurantById(Integer id) {
@@ -25,9 +29,9 @@ public class RestaurantService {
     }
 
 
-    public static Restaurant saveRestaurant(Restaurant restaurant) {
-        return restaurantRepository.save(restaurant);
 
+    public Restaurant saveRestaurant(Restaurant restaurant) {
+        return restaurantRepository.save(restaurant);
     }
 
 
@@ -56,4 +60,9 @@ public class RestaurantService {
     public List<Restaurant> getRandomRestaurant() {
         return restaurantRepository.getRandomRestaurant();
     }
+
+    public List<Restaurant> getRestaurantByCity(Integer id) {
+        return restaurantRepository.getByCity(id);
+    }
+
 }
