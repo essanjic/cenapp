@@ -56,10 +56,5 @@ public class UserController {
             throw new UsernameNotFoundException("invalid user request !");
         }
     }
-    /*@PostMapping("/restaurant")
-    public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant){
-        return ResponseEntity.ok(restaurantService.saveRestaurant(restaurant));
-    }*/
-
 
 }
