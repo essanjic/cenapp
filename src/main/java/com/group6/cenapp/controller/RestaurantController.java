@@ -93,6 +93,7 @@ public class RestaurantController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<String> deleteRestaurant(@PathVariable Integer id){
         if(restaurantService.getRestaurantById(id).isPresent()){
             restaurantService.deleteRestaurantById(id);

@@ -1,7 +1,6 @@
 package com.group6.cenapp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRawValue;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,8 +37,8 @@ public class Restaurant implements Serializable {
     @Column(name = "email_restaurant")
     private String email;
     @ElementCollection
-    @Column(name = "day_disponibility")
-    @JsonRawValue
+    @CollectionTable(name = "restaurant_day_disponibility", joinColumns = @JoinColumn(name = "restaurant_id"))
+    @JsonProperty("day_disponibility")
     private List<String> day_disponibility;
     private boolean parking;
     @Column(name = "live_music")
