@@ -5,12 +5,12 @@ import com.group6.cenapp.model.entity.UserInfo;
 import com.group6.cenapp.service.JwtService;
 import com.group6.cenapp.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -54,17 +54,29 @@ public class UserController {
     @PostMapping("/generateToken")
     public ResponseEntity<?> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         System.out.println("hola");
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+
+        Authentication authentication = authenticateUser(authRequest);
+
         if (authentication.isAuthenticated()) {
             String token = jwtService.generateToken(authRequest.getUsername());
-            Map<String, String> response = new HashMap<>();
-            response.put("token", token);
+            Map<String, String> response = createTokenResponse(token);
             return ResponseEntity.ok(response);
         } else {
-            throw new UsernameNotFoundException("invalid user request !");
-//            return ResponseEntity.status(401).body("Usuario o password invalido!");
-
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o contraseña inválidos");
         }
     }
+
+    private Authentication authenticateUser(AuthRequest authRequest) {
+        return authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+        );
+    }
+
+    private Map<String, String> createTokenResponse(String token) {
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token);
+        return response;
+    }
+
 
 }
