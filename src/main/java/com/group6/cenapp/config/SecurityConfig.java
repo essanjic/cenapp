@@ -38,7 +38,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/v1/api/restaurants/create", "/v1/api/restaurants", "v1/api/restaurants/{id}", "/v1/api/restaurants/delete/{id}", "/v1/api/restaurants/update").permitAll()
+                .requestMatchers("/v1/api/restaurants/create",
+                        "/v1/api/restaurants",
+                        "v1/api/restaurants/{id}",
+                        "/v1/api/restaurants/delete/{id}",
+                        "/v1/api/restaurants/update")
+                .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/auth/user/**").authenticated()

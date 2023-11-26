@@ -135,6 +135,17 @@ public class RestaurantController {
     public ResponseEntity<List<Restaurant>> findAllRandom(){
         return ResponseEntity.ok(restaurantService.getRandomRestaurant());
     }
+
+    /*@GetMapping("/availability")
+    if
+    public ResponseEntity<List<Restaurant>> searchrestaurantByAvailability(@RequestParam Integer cityId, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate, @RequestParam Integer people) {
+        List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCityAndRangeDate(cityId, startDate, endDate);
+        if(!restaurantSearches.isEmpty()){
+            return ResponseEntity.ok(restaurantSearches);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }*/
 }
 
 

@@ -77,6 +77,8 @@ public class Restaurant implements Serializable {
     @JsonProperty("city_id")
     private Integer cityId;
 
+
+
     @PrePersist
     public void prePersist() {
         if (cityId != null) {

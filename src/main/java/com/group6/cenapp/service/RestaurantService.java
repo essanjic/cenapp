@@ -67,4 +67,9 @@ public class RestaurantService {
         return restaurantRepository.getByCity(id);
     }
 
+    //Esta sera la logica para
+    /*public List<Restaurant> getRestaurantByCityAndRangeDateAndTable(Integer city_id, LocalDate check_in_date, LocalDate check_out_date, Boolean tableIsAvailable
+        return restaurantRepository.getByCityAndRangeDateAndTable(city_id, check_in_date, check_out_date, tableIsAvailable) {
+    }*/
 }
+
