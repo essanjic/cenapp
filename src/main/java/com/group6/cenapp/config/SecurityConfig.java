@@ -42,15 +42,17 @@ public class SecurityConfig {
                         "/v1/api/restaurants",
                         "v1/api/restaurants/{id}",
                         "/v1/api/restaurants/delete/{id}",
-                        "/v1/api/restaurants/update")
+                        "/v1/api/restaurants/update",
+                        "/v1/api/categories",
+                        "/v1/api/categories/{id}")
                 .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/auth/user/**",
-                        "/v1/api/categories",
-                        "/v1/api/categories/{id}").authenticated()
+                .authorizeHttpRequests().requestMatchers("/auth/user/**").authenticated()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/auth/admin/**").authenticated()
+                .authorizeHttpRequests().requestMatchers("/auth/admin/**",
+                        "/v1/api/categories/create",
+                        "/v1/api/categories/update").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

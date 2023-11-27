@@ -294,7 +294,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Marco\",\r\n    \"lastname\": \"Pipolo\",\r\n    \"email\": \"pipolomarco@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave\",\r\n    \"roles\": \"ROLE_USER\"\r\n}",
+							"raw": "{\r\n    \"name\": \"PibeLomos\",\r\n    \"lastname\": \"Pipolo\",\r\n    \"email\": \"pibelomos@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave\",\r\n    \"roles\": \"ROLE_ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -375,7 +375,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Marco\",\r\n    \"password\": \"Soyunaclave\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Pibe\",\r\n    \"password\": \"Soyunaclave\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -671,14 +671,7 @@
 					"name": "Get all restaurants",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJjbyIsImlhdCI6MTcwMDc2NzU3MywiZXhwIjoxNzAwNzY5MzczfQ.sZSbJLltRuSOhOdS4eshoNr_YQmKocpuHGv1oCmmN_Q",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
@@ -712,7 +705,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZWxpIiwiaWF0IjoxNzAwNzY2NjM2LCJleHAiOjE3MDA3Njg0MzZ9.LHpy8Y61TlFTm79G26Rp-jFqKeQTw5W4V88gRPojHYc",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZWwiLCJpYXQiOjE3MDA3OTUwNjgsImV4cCI6MTcwMDc5Njg2OH0.D1Oe5c6wr-SbLMGYKDJ834KaAB3gcmEsgTBqJT1Zvho",
 									"type": "string"
 								}
 							]
@@ -720,15 +713,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/v1/api/restaurants/1",
+							"raw": "localhost:8080//v1/api/restaurants/category/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"",
 								"v1",
 								"api",
 								"restaurants",
+								"category",
 								"1"
 							]
 						}
@@ -1216,15 +1211,22 @@
 			"name": "Categories",
 			"item": [
 				{
-					"name": "Listar Categorias",
+					"name": "Listar Categorías",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWJlIiwiaWF0IjoxNzAxMDQ2NDEyLCJleHAiOjE3MDEwNDgyMTJ9.2xKcbizKpsi_4oA_KIVcjGmEzV5P7pMLEnPzmPe1654",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/v1/api/categories/1",
+							"raw": "http://localhost:8080/v1/api/categories",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1233,25 +1235,38 @@
 							"path": [
 								"v1",
 								"api",
-								"categories",
-								"1"
+								"categories"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Listar Categorias Copy",
+					"name": "Listar Categoria por ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWJlTG9tb3MiLCJpYXQiOjE3MDEwNDY0NzQsImV4cCI6MTcwMTA0ODI3NH0.9gU484WxjjdCKRuQopSWZjXvoPypthojspo4eMyHJ-c",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/categories",
+							"raw": "localhost:8080/v1/api/categories/2",
 							"host": [
-								"{{url}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
-								"categories"
+								"v1",
+								"api",
+								"categories",
+								"2"
 							]
 						}
 					},
@@ -1260,11 +1275,21 @@
 				{
 					"name": "Crear Categoria",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWJlTG9tb3MiLCJpYXQiOjE3MDEwNDYzNTgsImV4cCI6MTcwMTA0ODE1OH0.r3f78E1gHhNcVDDJLD_ntUpkfKLEb2X3yJ-L2Z6k3Cc",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Chinesse Food\",\r\n    \"description\": \"Soy una prueba\",\r\n    \"url\": \"urlDeLaCategoria\"\r\n}",
+							"raw": "{\r\n    \"category\": 2,\r\n    \"name\": \"Colombiana\",\r\n    \"description\": \"Comida colombiana pero en su versión vegetariana xdxd\",\r\n    \"short_description\": \"Comida colombiana...\",\r\n    \"food_type\": \"Vegetariana\",\r\n    \"image\": \"null\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1272,11 +1297,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/categories/create",
+							"raw": "http://localhost:8080/v1/api/categories/create",
+							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"v1",
+								"api",
 								"categories",
 								"create"
 							]
@@ -1287,11 +1316,21 @@
 				{
 					"name": "Editar Categoria",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWJlIiwiaWF0IjoxNzAxMDQ3MDE0LCJleHAiOjE3MDEwNDg4MTR9.OiPDs7Cqd4Es0DROR1hmthXc_nHj8cwy2ePr-b1N_S4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 2,\r\n    \"title\": \"Prueba2\",\r\n    \"description\": \"prueba2\",\r\n    \"urlImage\": \"Prueba2\"\r\n}",
+							"raw": "{\r\n    \"food_type\": \"Vegetariana\",\r\n    \"image\": \"null\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1299,11 +1338,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/categories/update",
+							"raw": "localhost:8080/v1/api/categories/update",
 							"host": [
-								"{{url}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"v1",
+								"api",
 								"categories",
 								"update"
 							]
