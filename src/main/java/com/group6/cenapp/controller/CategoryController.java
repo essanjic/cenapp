@@ -6,7 +6,6 @@ import com.group6.cenapp.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +14,7 @@ import java.util.Optional;
 
 @CrossOrigin (origins = "*")
 @RestController
-@RequestMapping("/v1/ap1/categories")
-@PreAuthorize("hasAuthority('ROLE_ADMIN')('ROLE_USER')")
+@RequestMapping("/v1/api/categories")
 public class CategoryController {
 
     @Autowired
@@ -28,14 +26,11 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> buscarCategoria(@PathVariable Integer id) {
-        Optional<Category> categoriaBuscada = categoryService.searchCategory(id);
-        if(categoriaBuscada.isPresent()) {
-            return ResponseEntity.ok(categoriaBuscada.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public ResponseEntity<Category> findCategoryById(@PathVariable Integer id) {
+        Optional<Category> categorySearch = categoryService.searchCategory(id);
+        return categorySearch.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
 
     @PostMapping("/create")
     public ResponseEntity<Category> crearCategoria(@RequestBody Category category){

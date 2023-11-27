@@ -53,7 +53,6 @@ public class UserController {
 
     @PostMapping("/generateToken")
     public ResponseEntity<?> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
-        System.out.println("hola");
 
         Authentication authentication = authenticateUser(authRequest);
 
