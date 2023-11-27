@@ -1,65 +1,79 @@
 package com.group6.cenapp.controller;
 
-import com.group6.cenapp.exception.DuplicatedValueException;
-import com.group6.cenapp.model.User;
-import com.group6.cenapp.model.dto.UserDto;
-import com.group6.cenapp.response.ApiResponseHandler;
-import com.group6.cenapp.service.UserService;
+import com.group6.cenapp.model.entity.AuthRequest;
+import com.group6.cenapp.model.entity.UserInfo;
+import com.group6.cenapp.service.JwtService;
+import com.group6.cenapp.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
-@CrossOrigin(origins = "*",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
-@RequestMapping("/v1/api/users")
+@RequestMapping("/auth")
 public class UserController {
 
+    @Autowired
+    private UserInfoService service;
 
     @Autowired
-    private UserService userService;
+    private JwtService jwtService;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-    @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUsers(){
-        return ResponseEntity.ok(userService.getAllUsers());
+    @GetMapping("/welcome")
+    public String welcome() {
+        return "Welcome this endpoint is not secure";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getUserById(@PathVariable int id) {
-        Optional<User> userSearch = userService.getUserById(id);
-        if(userSearch.isPresent()){
-            return ApiResponseHandler.generateResponse("User data retrieved successfully", HttpStatus.OK, userSearch.get());
+    @PostMapping("/addNewUser")
+    public String addNewUser(@RequestBody UserInfo userInfo) {
+        return service.addUser(userInfo);
+    }
+
+    @GetMapping("/user/userProfile")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public String userProfile() {
+        return "Welcome to User Profile";
+    }
+
+    @GetMapping("/admin/adminProfile")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String adminProfile() {
+        return "Welcome to Admin Profile";
+    }
+
+    @PostMapping("/generateToken")
+    public ResponseEntity<?> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+
+        Authentication authentication = authenticateUser(authRequest);
+
+        if (authentication.isAuthenticated()) {
+            String token = jwtService.generateToken(authRequest.getUsername());
+            Map<String, String> response = createTokenResponse(token);
+            return ResponseEntity.ok(response);
         } else {
-            return ApiResponseHandler.generateResponseError("User "+ id + " not found", HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o contraseña inválidos");
         }
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Object> createUser(@RequestBody UserDto userDto) throws DuplicatedValueException {
-        return ApiResponseHandler.generateResponse("User data save successfully", HttpStatus.OK, userService.saveUser(userDto));
+    private Authentication authenticateUser(AuthRequest authRequest) {
+        return authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Object> updateUser(@RequestBody UserDto userDto) {
-        if(userDto.getId() != null && userService.getUserById(Math.toIntExact(userDto.getId())).isPresent()){
-            return ApiResponseHandler.generateResponse("User data update successfully", HttpStatus.OK, userService.updateUser(userDto));
-        } else {
-            return ApiResponseHandler.generateResponseError("User with ID: "+ userDto.getId() + " not found", HttpStatus.NOT_FOUND);
-        }
+    private Map<String, String> createTokenResponse(String token) {
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token);
+        return response;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable int id) {
-        if(userService.getUserById(id).isPresent()){
-            userService.deleteUserById(id);
-            return ApiResponseHandler.generateResponse(null, HttpStatus.NO_CONTENT, null);
-        } else {
-            return ApiResponseHandler.generateResponseError("User "+ id + " not found", HttpStatus.NOT_FOUND);
-        }
-    }
 }

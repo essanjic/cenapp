@@ -1,8 +1,11 @@
 package com.group6.cenapp.model.dto;
 
-import com.group6.cenapp.model.City;
-import com.group6.cenapp.model.Role;
-import lombok.*;
+import com.group6.cenapp.model.entity.City;
+import com.group6.cenapp.model.entity.Role;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 
@@ -21,6 +24,5 @@ public class UserDto {
     private City idCity;
     private Role idRole;
     private String idImage;
-
 
 }

@@ -1,6 +1,6 @@
 package com.group6.cenapp.repository;
 
-import com.group6.cenapp.model.Role;
+import com.group6.cenapp.model.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

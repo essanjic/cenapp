@@ -1,0 +1,1516 @@
+{
+	"info": {
+		"_postman_id": "578d4853-caaf-4369-a615-93f56f1ef949",
+		"name": "cenapp test backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24706753"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de estado debe ser 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta debe ser un arreglo\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Debe haber al menos un elemento en la respuesta\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.length.above(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "2612d386-8b46-40d1-a2de-a407d8513661",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Trans",
+								"value": "chunked",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/api/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get id user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "2612d386-8b46-40d1-a2de-a407d8513661",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/users/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "bce50d31-0b39-429d-ab63-9b282e9066b0",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marco\",\r\n    \"lastname\": \"Pipolo 2\",\r\n    \"email\": \"marcopipolo@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave123\",\r\n    \"enabled\": true,\r\n    \"city_id\": \r\n    {\r\n        \"id\":1,\r\n        \"name\": \"Bogotá D.C\",\r\n        \"abbreviation\": \"BOG\"\r\n        },\r\n    \"role_id\": {\r\n     \"id\": 1,\r\n     \"name\": \"USER\"   \r\n    },\r\n    \"image_id\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/addNewUser",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"addNewUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Auth User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "bce50d31-0b39-429d-ab63-9b282e9066b0",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marco\",\r\n    \"lastname\": \"Pipolo\",\r\n    \"email\": \"marcopipolo@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave123\",\r\n    \"roles\": \"ROLE_ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/addNewUser",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"addNewUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/users/delete/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"users",
+								"delete",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users Auth",
+			"item": [
+				{
+					"name": "Create Auth User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "bce50d31-0b39-429d-ab63-9b282e9066b0",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"PibeLomos\",\r\n    \"lastname\": \"Pipolo\",\r\n    \"email\": \"pibelomos@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave\",\r\n    \"roles\": \"ROLE_ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/addNewUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"addNewUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de estado debe ser 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta debe ser un arreglo\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Debe haber al menos un elemento en la respuesta\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.length.above(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "2612d386-8b46-40d1-a2de-a407d8513661",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Trans",
+								"value": "chunked",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Pibe\",\r\n    \"password\": \"Soyunaclave\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/generateToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"generateToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get id user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "http://localhost:8080/auth/generateToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/auth/user/userProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"user",
+								"userProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get id admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZWwiLCJpYXQiOjE3MDA3MTA3NzUsImV4cCI6MTcwMDcxMjU3NX0.i0fzNWJiK7HSQZhcZuyzhTqMK8usWtRyevSG51Tfrm8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/auth/admin/adminProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"admin",
+								"adminProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/users/delete/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"users",
+								"delete",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get all admin",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de estado debe ser 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta debe ser un arreglo\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Debe haber al menos un elemento en la respuesta\", function () {\r",
+									"    pm.expect(pm.response.json()).to.have.length.above(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Trans",
+								"value": "chunked",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/api/admin/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"admin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get id admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/admin/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"admin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marco\",\r\n    \"lastname\": \"Pipolo\",\r\n    \"email\": \"marcopipolo@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave123\",\r\n    \"enabled\": true,\r\n    \"city_id\": 1,\r\n    \"role_id\": {\r\n        \"id\": 2,\r\n        \"name\": \"ADMINISTRATOR\"\r\n    },\r\n    \"image_id\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/admin/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"admin",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 2,\r\n        \"name\": \"Marco\",\r\n        \"lastName\": \"Jimenez\",\r\n        \"email\": \"marcoJuas@gmail.com\",\r\n        \"password\": \"Vladimir12*\",\r\n        \"enabled\": true,\r\n        \"city\": {\r\n            \"id\": 1,\r\n            \"name\": \"Bogotá D.C\",\r\n            \"country\": {\r\n                \"id\": 1,\r\n                \"name\": \"Colombia\",\r\n                \"abbreviation\": \"CO\"\r\n            }\r\n        },\r\n        \"role\": {\r\n            \"id\": 1,\r\n            \"name\": \"user\"\r\n        }\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/admin/update/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"admin",
+								"update",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/admin/delete/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"admin",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurant",
+			"item": [
+				{
+					"name": "Get all restaurants",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Trans",
+								"value": "chunked",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/api/restaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get id restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZWwiLCJpYXQiOjE3MDA3OTUwNjgsImV4cCI6MTcwMDc5Njg2OH0.D1Oe5c6wr-SbLMGYKDJ834KaAB3gcmEsgTBqJT1Zvho",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080//v1/api/restaurants/category/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"",
+								"v1",
+								"api",
+								"restaurants",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJjbyIsImlhdCI6MTcwMDc2NzU3MywiZXhwIjoxNzAwNzY5MzczfQ.sZSbJLltRuSOhOdS4eshoNr_YQmKocpuHGv1oCmmN_Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Prueba 1\",\r\n    \"description\": \"Hola soy Manu\",\r\n    \"short_description\": \"Hola soy ...\",\r\n    \"address\": \"Calle 123\",\r\n    \"phone\": \"+549323321234\",\r\n    \"zone_street\": \"Zona prueba\",\r\n    \"rating\": 4.5,\r\n    \"dayDisponibility\": [\r\n        {\r\n            \"dayOfWeek\": \"MONDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"20:00\"\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"TUESDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"20:00\"\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"WEDNESDAY\",\r\n            \"open\": false,\r\n            \"openHour\": null,\r\n            \"closeHour\": null\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"THURSDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"20:00\"\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"FRIDAY\",\r\n            \"open\": false,\r\n            \"openHour\": null,\r\n            \"closeHour\": null\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"SATURDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"20:00\"\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"SUNDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"18:00\"\r\n        }\r\n    ],\r\n    \"parking\": true,\r\n    \"live_music\": true,\r\n    \"events\": true,\r\n    \"terrace\": false,\r\n    \"active\": true,\r\n    \"area\": \"10 m2\",\r\n    \"average_score\": 4.5,\r\n    \"latitude\": \"prueba1\",\r\n    \"longitude\": \"Prueba2\",\r\n    \"cancellation_policy\": \"soy una prueba de políticas de cancelación\",\r\n    \"hse_policy\": \"hse_policies prueba\",\r\n    \"site_policy\": \"site_policies prueba\",\r\n    \"email\": \"soy@unaprueba.com\",\r\n    \"category\": {\r\n        \"category\": 1,\r\n        \"name\": \"Comida de Mar\",\r\n        \"description\": \"soy una categoria\",\r\n        \"short_description\": \"aksjdaksljd\",\r\n        \"food_type\": \"Mesa 1\",\r\n        \"image\": null\r\n    },\r\n    \"city_id\": 1,\r\n    \"image\": \"imagenescrucks\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/restaurants/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"restaurants",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZWxpIiwiaWF0IjoxNzAwNzY3NDQwLCJleHAiOjE3MDA3NjkyNDB9.0hZY6K11ANx4KD_hCYiU2nr-XrBrc1K0u8J48nSVjv0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parking\": true,\r\n    \"live_music\": true,\r\n    \"events\": true,\r\n    \"terraza\": false,\r\n    \"active\": true,\r\n    \"area\": \"12 m2\",\r\n    \"average_score\": 3.0,\r\n    \"latitude\": \"prueba1\",\r\n    \"longitude\": \"Prueba2\",\r\n    \"cancellation_policies\": \"soy una prueba de cancelación y políticas\",\r\n    \"hse_policies\": \"hse_policies prueba\",\r\n    \"site_policies\": \"site_policies prueba\",\r\n    \"category_id\": 1,\r\n    \"city_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/restaurants/update/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"restaurants",
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZWxpIiwiaWF0IjoxNzAwNzY2ODA1LCJleHAiOjE3MDA3Njg2MDV9.3AClwI4wcow2VOKP9TzAhKE6Ggi5Uo2FtifsaBMykpY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/restaurants/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"restaurants",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"holasoyuna@prueba.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/welcome",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"welcome"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prueba",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/auth/welcome",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"welcome"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth2 admin",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"holasoyuna@prueba.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/generateToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"generateToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservas",
+			"item": [
+				{
+					"name": "Listar reservas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reservations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Reserva",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"arrival_time\": \"10:30:00\",\r\n    \"check_in_date\": \"2025-02-17\",\r\n    \"checkout_date\": \"2025-02-24\",\r\n    \"comments\": \"llevaré mascota\",\r\n    \"restaurant\": {\r\n        \"id\": 8\r\n    },\r\n    \"user\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/reservations/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservations",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Reserva por ID de Producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reservations/product/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservations",
+								"product",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Reserva por ID de User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/reservations/user/6",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reservations",
+								"user",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "Listar imagenes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/images",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Imagen por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/images/54",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"images",
+								"54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Imagen por ID Producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"title\":\"Image Test\",\r\n    \"url\": \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hola.com%2Fmascotas%2Fgaleria%2F20210217184541%2Fgatos-gestos-lenguaje-significado%2F1%2F&psig=AOvVaw2trVmj0VaYCc5QQjeYN89O&ust=1700196137901000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNjIhqjax4IDFQAAAAAdAAAAABAE\"\r\n }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/images/create/17",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"images",
+								"create",
+								"17"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Imagen por ID Producto",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 52,\r\n    \"title\": \"Image Test222\",\r\n    \"url\": \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hola.com%2Fmascotas%2Fgaleria%2F20210217184541%2Fgatos-gestos-lenguaje-significado%2F1%2F&psig=AOvVaw2trVmj0VaYCc5QQjeYN89O&ust=1700196137901000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNjIhqjax4IDFQAAAAAdAAAAABAE\",\r\n    \"restaurant_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/images/update/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"images",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Imagen por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/images/delete/53",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"images",
+								"delete",
+								"53"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Listar Categorías",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWJlIiwiaWF0IjoxNzAxMDQ2NDEyLCJleHAiOjE3MDEwNDgyMTJ9.2xKcbizKpsi_4oA_KIVcjGmEzV5P7pMLEnPzmPe1654",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/api/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Categoria por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWJlTG9tb3MiLCJpYXQiOjE3MDEwNDY0NzQsImV4cCI6MTcwMTA0ODI3NH0.9gU484WxjjdCKRuQopSWZjXvoPypthojspo4eMyHJ-c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/categories/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"categories",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWJlTG9tb3MiLCJpYXQiOjE3MDEwNDYzNTgsImV4cCI6MTcwMTA0ODE1OH0.r3f78E1gHhNcVDDJLD_ntUpkfKLEb2X3yJ-L2Z6k3Cc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": 2,\r\n    \"name\": \"Colombiana\",\r\n    \"description\": \"Comida colombiana pero en su versión vegetariana xdxd\",\r\n    \"short_description\": \"Comida colombiana...\",\r\n    \"food_type\": \"Vegetariana\",\r\n    \"image\": \"null\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/categories/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"categories",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWJlIiwiaWF0IjoxNzAxMDQ3MDE0LCJleHAiOjE3MDEwNDg4MTR9.OiPDs7Cqd4Es0DROR1hmthXc_nHj8cwy2ePr-b1N_S4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"food_type\": \"Vegetariana\",\r\n    \"image\": \"null\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/categories/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"categories",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/categories/delete/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"categories",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Listar Roles",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "2612d386-8b46-40d1-a2de-a407d8513661",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/roles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Rol por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/roles/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"roles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Rol",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "2612d386-8b46-40d1-a2de-a407d8513661",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/api/roles/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"roles",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Rol por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/roles/delete/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roles",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

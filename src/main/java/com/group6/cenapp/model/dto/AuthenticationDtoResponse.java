@@ -10,13 +10,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class AuthenticationDtoResponse {
-    //private final String jwt;
+    // private final String jwt;
     private int id;
     private String name;
     private String lastName;
     private String email;
     private String city;
     private String role;
-
 
 }
