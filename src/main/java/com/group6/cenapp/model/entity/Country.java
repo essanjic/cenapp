@@ -1,4 +1,4 @@
-package com.group6.cenapp.model;
+package com.group6.cenapp.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "country")
 public class Country implements Serializable{
     @Id
     @Column(name="id", nullable = false, unique = true, length = 100)

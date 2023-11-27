@@ -1,4 +1,4 @@
-package com.group6.cenapp.model;
+package com.group6.cenapp.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,15 +16,15 @@ import java.util.List;
 @Entity
 @Table(name = "role")
 public class Role implements Serializable {
-    @Getter
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true, length = 100)
-    private int id;
+    @Column(name = "role_id", nullable = false, unique = true)
+    private Integer idRole;
     private String name;
     @OneToMany
     private List<User> users;
 
+    public Integer getId() {
+        return idRole;
+    }
 }
-
-

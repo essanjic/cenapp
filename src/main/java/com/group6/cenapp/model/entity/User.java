@@ -1,47 +1,45 @@
-package com.group6.cenapp.model;
+package com.group6.cenapp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @Entity
-@AllArgsConstructor
 @Table(name = "user")
 public class User {
-
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    @Getter
     @Id
-    private Long id;
-    @Getter
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
+    private int idUser;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    @Getter
     private String lastName;
     @Column(unique = true, nullable = false)
-    @Getter
     private String email;
-    @Setter
-    @Getter
     private String password;
-    @Column(nullable = true, columnDefinition = "TINYINT")
+    @Column(nullable = false, columnDefinition = "TINYINT")
     private Boolean enabled;
     @ManyToOne
     @JoinColumn(name = "id_city", nullable = false, foreignKey = @ForeignKey(name = "FK_user_city"))
-    @Getter
+    @JsonIgnore
     private City idCity;
     @ManyToOne
     @JoinColumn(name = "id_role", nullable = false, foreignKey = @ForeignKey(name = "FK_user_role"))
-    @Getter
-    @Setter
+    @JsonIgnore
     private Role idRole;
-    @OneToOne
-    @JoinColumn(name = "image_id", foreignKey = @ForeignKey(name = "FK_user_image"))
-    @Getter
-    private Image image;
+    private String image;
 
+    public int getId() {
+        return idUser;
+    }
+
+    public Role getRole() {
+        return idRole;
+    }
 }
