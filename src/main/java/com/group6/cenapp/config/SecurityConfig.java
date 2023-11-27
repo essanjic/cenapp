@@ -36,9 +36,10 @@ public class SecurityConfig {
     // Configuring HttpSecurity
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+        return http.csrf().and().cors().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/v1/api/restaurants/create",
+                        "/v1/api/restaurants/pages",
                         "/v1/api/restaurants",
                         "v1/api/restaurants/{id}",
                         "/v1/api/restaurants/delete/{id}",

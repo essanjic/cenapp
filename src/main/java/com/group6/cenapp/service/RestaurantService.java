@@ -4,6 +4,8 @@ import com.group6.cenapp.model.entity.Category;
 import com.group6.cenapp.model.entity.Restaurant;
 import com.group6.cenapp.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,6 +20,11 @@ public class RestaurantService {
 
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
+    }
+
+
+    public Page<Restaurant> getAllRestaurants(Pageable pageable) {
+        return restaurantRepository.findAll(pageable);
     }
 
     public List<Restaurant> getRestaurantByCategory(Category category) {

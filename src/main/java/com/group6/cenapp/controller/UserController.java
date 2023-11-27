@@ -77,5 +77,15 @@ public class UserController {
         return response;
     }
 
+    @GetMapping("/check-email")
+    public ResponseEntity<String> checkEmailAvailability(@RequestParam String email) {
+        boolean isAvailable = service.isEmailAvailable(email);
+
+        if (isAvailable) {
+            return new ResponseEntity<>("Email is available", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Email is not available", HttpStatus.CONFLICT);
+        }
+    }
 
 }
