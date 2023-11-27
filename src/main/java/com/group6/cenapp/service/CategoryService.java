@@ -14,26 +14,21 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-
     public List<Category> listCategories() {
         return categoryRepository.findAll();
     }
-
 
     public Optional<Category> searchCategory(Integer id) {
         return categoryRepository.findById(id);
     }
 
-
     public Category saveCategory(Category category) {
         return categoryRepository.save(category);
     }
 
-
     public Category updateCategory(Category category) {
         return categoryRepository.save(category);
     }
-
 
     public void deleteCategory(Integer id) {
         categoryRepository.deleteById(id);

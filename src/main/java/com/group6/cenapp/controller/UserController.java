@@ -67,8 +67,7 @@ public class UserController {
 
     private Authentication authenticateUser(AuthRequest authRequest) {
         return authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
-        );
+                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
     }
 
     private Map<String, String> createTokenResponse(String token) {
@@ -76,6 +75,5 @@ public class UserController {
         response.put("token", token);
         return response;
     }
-
 
 }

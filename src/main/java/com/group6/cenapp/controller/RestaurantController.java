@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin (origins = "*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/v1/api/restaurants")
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -35,18 +35,19 @@ public class RestaurantController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> findRestaurant(@PathVariable Integer id)  {
+    public ResponseEntity<Object> findRestaurant(@PathVariable Integer id) {
         Optional<Restaurant> productoBuscado = restaurantService.getRestaurantById(id);
-        if(productoBuscado.isPresent())
-            return ApiResponseHandler.generateResponse("Restaurant data retrieved successfully", HttpStatus.OK, productoBuscado.get());
+        if (productoBuscado.isPresent())
+            return ApiResponseHandler.generateResponse("Restaurant data retrieved successfully", HttpStatus.OK,
+                    productoBuscado.get());
 
-        return ApiResponseHandler.generateResponseError("Restaurant "+ id + " not found", HttpStatus.NOT_FOUND);
+        return ApiResponseHandler.generateResponseError("Restaurant " + id + " not found", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/category/{id}")
     public ResponseEntity<List<Restaurant>> searchRestaurantByCategory(@PathVariable Category category) {
         List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCategory(category);
-         if(!restaurantSearches.isEmpty()){
+        if (!restaurantSearches.isEmpty()) {
             return ResponseEntity.ok(restaurantSearches);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -57,7 +58,8 @@ public class RestaurantController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) {
         if (restaurant.getCategory() == null || restaurant.getCategory().getCategory() == null) {
-            // Manejar el caso en que la categoría no está presente en el cuerpo de la solicitud
+            // Manejar el caso en que la categoría no está presente en el cuerpo de la
+            // solicitud
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
@@ -80,22 +82,22 @@ public class RestaurantController {
         return ResponseEntity.ok(savedRestaurant);
     }
 
-
     @PutMapping("/update")
-    public ResponseEntity<?> editRestaurant(@RequestBody Restaurant restaurant) throws Exception{
+    public ResponseEntity<?> editRestaurant(@RequestBody Restaurant restaurant) throws Exception {
         Optional<Restaurant> productoBuscado = restaurantService.getRestaurantById(restaurant.getId_restaurant());
-        if(productoBuscado.isPresent()){
+        if (productoBuscado.isPresent()) {
             return ResponseEntity.ok(restaurantService.updateRestaurant(restaurant));
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El restaurante con ID: " + restaurant.getId_restaurant() + " no se encuentra ");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El restaurante con ID: " + restaurant.getId_restaurant() + " no se encuentra ");
         }
 
     }
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<String> deleteRestaurant(@PathVariable Integer id){
-        if(restaurantService.getRestaurantById(id).isPresent()){
+    public ResponseEntity<String> deleteRestaurant(@PathVariable Integer id) {
+        if (restaurantService.getRestaurantById(id).isPresent()) {
             restaurantService.deleteRestaurantById(id);
             return ResponseEntity.ok("Se eliminó con éxito el restaurante con ID: " + id);
         }
@@ -105,7 +107,7 @@ public class RestaurantController {
     @GetMapping("/city/{id}")
     public ResponseEntity<List<Restaurant>> searchRestaurantByCategory(@PathVariable Integer id) {
         List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCity(id);
-        if(!restaurantSearches.isEmpty()){
+        if (!restaurantSearches.isEmpty()) {
             return ResponseEntity.ok(restaurantSearches);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -113,9 +115,11 @@ public class RestaurantController {
     }
 
     @GetMapping("/dates/{startDate}/{endDate}")
-    public ResponseEntity<List<Restaurant>> searchrestaurantByRangeDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+    public ResponseEntity<List<Restaurant>> searchrestaurantByRangeDate(
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
         List<Restaurant> restaurantSearches = restaurantService.getRestaurantByRangeDate(startDate, endDate);
-        if(!restaurantSearches.isEmpty()){
+        if (!restaurantSearches.isEmpty()) {
             return ResponseEntity.ok(restaurantSearches);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -123,30 +127,39 @@ public class RestaurantController {
     }
 
     @GetMapping("/cityAndDates/{cityId}/{startDate}/{endDate}")
-    public ResponseEntity<List<Restaurant>> searchrestaurantByRangeDate(@PathVariable Integer cityId, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
-        List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCityAndRangeDate(cityId, startDate, endDate);
-        if(!restaurantSearches.isEmpty()){
+    public ResponseEntity<List<Restaurant>> searchrestaurantByRangeDate(@PathVariable Integer cityId,
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+        List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCityAndRangeDate(cityId, startDate,
+                endDate);
+        if (!restaurantSearches.isEmpty()) {
             return ResponseEntity.ok(restaurantSearches);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
     @GetMapping("findAll/random")
-    public ResponseEntity<List<Restaurant>> findAllRandom(){
+    public ResponseEntity<List<Restaurant>> findAllRandom() {
         return ResponseEntity.ok(restaurantService.getRandomRestaurant());
     }
 
-    /*@GetMapping("/availability")
-    if
-    public ResponseEntity<List<Restaurant>> searchrestaurantByAvailability(@RequestParam Integer cityId, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate, @RequestParam Integer people) {
-        List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCityAndRangeDate(cityId, startDate, endDate);
-        if(!restaurantSearches.isEmpty()){
-            return ResponseEntity.ok(restaurantSearches);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-    }*/
+    /*
+     * @GetMapping("/availability")
+     * if
+     * public ResponseEntity<List<Restaurant>>
+     * searchrestaurantByAvailability(@RequestParam Integer
+     * cityId, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate
+     * startDate, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate
+     * endDate, @RequestParam Integer people) {
+     * List<Restaurant> restaurantSearches =
+     * restaurantService.getRestaurantByCityAndRangeDate(cityId, startDate,
+     * endDate);
+     * if(!restaurantSearches.isEmpty()){
+     * return ResponseEntity.ok(restaurantSearches);
+     * } else {
+     * return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+     * }
+     * }
+     */
 }
-
-
-

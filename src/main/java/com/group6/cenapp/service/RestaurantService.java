@@ -15,7 +15,6 @@ public class RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
     }
@@ -24,39 +23,30 @@ public class RestaurantService {
         return restaurantRepository.getByCategory(category);
     }
 
-
-
     public Optional<Restaurant> getRestaurantById(Integer id) {
         return restaurantRepository.findById(id);
     }
-
-
 
     public Restaurant saveRestaurant(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }
 
-
     public Restaurant updateRestaurant(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }
-
 
     public void deleteRestaurantById(Integer id) {
         restaurantRepository.deleteById(id);
     }
 
-
-
-
     public List<Restaurant> getRestaurantByRangeDate(LocalDate check_in_date, LocalDate check_out_date) {
-        //System.out.println(check_in_date + " --- " + check_out_date);
-        return restaurantRepository.getByRangeDate(check_in_date,check_out_date);
+        // System.out.println(check_in_date + " --- " + check_out_date);
+        return restaurantRepository.getByRangeDate(check_in_date, check_out_date);
     }
 
-
-    public List<Restaurant> getRestaurantByCityAndRangeDate(Integer city_id, LocalDate check_in_date, LocalDate check_out_date) {
-        return restaurantRepository.getByCityAndRangeDate(city_id, check_in_date,check_out_date);
+    public List<Restaurant> getRestaurantByCityAndRangeDate(Integer city_id, LocalDate check_in_date,
+            LocalDate check_out_date) {
+        return restaurantRepository.getByCityAndRangeDate(city_id, check_in_date, check_out_date);
     }
 
     public List<Restaurant> getRandomRestaurant() {
@@ -67,9 +57,13 @@ public class RestaurantService {
         return restaurantRepository.getByCity(id);
     }
 
-    //Esta sera la logica para
-    /*public List<Restaurant> getRestaurantByCityAndRangeDateAndTable(Integer city_id, LocalDate check_in_date, LocalDate check_out_date, Boolean tableIsAvailable
-        return restaurantRepository.getByCityAndRangeDateAndTable(city_id, check_in_date, check_out_date, tableIsAvailable) {
-    }*/
+    // Esta sera la logica para
+    /*
+     * public List<Restaurant> getRestaurantByCityAndRangeDateAndTable(Integer
+     * city_id, LocalDate check_in_date, LocalDate check_out_date, Boolean
+     * tableIsAvailable
+     * return restaurantRepository.getByCityAndRangeDateAndTable(city_id,
+     * check_in_date, check_out_date, tableIsAvailable) {
+     * }
+     */
 }
-

@@ -19,7 +19,7 @@ import java.util.List;
 public class Restaurant implements Serializable {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column(name="restaurant_id", nullable = false, unique = true)
+    @Column(name = "restaurant_id", nullable = false, unique = true)
     private Integer id_restaurant;
     @Column(nullable = false)
     private String name;
@@ -27,7 +27,7 @@ public class Restaurant implements Serializable {
     private String address;
     private String phone;
     private String description;
-    @Column(name ="short_description" ,length = 50)
+    @Column(name = "short_description", length = 50)
     private String short_description;
     @Column(name = "zone_street")
     private String zone_street;
@@ -76,8 +76,6 @@ public class Restaurant implements Serializable {
     @Transient
     @JsonProperty("city_id")
     private Integer cityId;
-
-
 
     @PrePersist
     public void prePersist() {

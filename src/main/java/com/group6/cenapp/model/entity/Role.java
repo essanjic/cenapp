@@ -18,7 +18,7 @@ import java.util.List;
 public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column(name="role_id", nullable = false, unique = true)
+    @Column(name = "role_id", nullable = false, unique = true)
     private Integer idRole;
     private String name;
     @OneToMany
@@ -28,5 +28,3 @@ public class Role implements Serializable {
         return idRole;
     }
 }
-
-

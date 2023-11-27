@@ -1,6 +1,5 @@
 package com.group6.cenapp.model.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,7 +17,7 @@ import java.io.Serializable;
 @Table(name = "city")
 public class City implements Serializable {
     @Id
-    @Column(name="city_id", nullable = false, unique = true, length = 100)
+    @Column(name = "city_id", nullable = false, unique = true, length = 100)
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Integer idCity;
     @ManyToOne

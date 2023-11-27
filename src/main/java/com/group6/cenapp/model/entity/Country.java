@@ -18,9 +18,10 @@ import java.util.Objects;
 @Table(name = "country")
 public class Country implements Serializable{
     @Id
-    @Column(name="country_id", nullable = false, unique = true, length = 100)
+    @Column(name="id", nullable = false, unique = true, length = 100)
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Integer idCountry;
+    @Getter
+    private Long id;
     private String name;
     private String abbreviation;
 
@@ -28,11 +29,11 @@ public class Country implements Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Country country)) return false;
-        return Objects.equals(idCountry, country.idCountry) && Objects.equals(name, country.name) && Objects.equals(abbreviation, country.abbreviation);
+        return Objects.equals(id, country.id) && Objects.equals(name, country.name) && Objects.equals(abbreviation, country.abbreviation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCountry, name, abbreviation);
+        return Objects.hash(id, name, abbreviation);
     }
 }

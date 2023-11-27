@@ -15,12 +15,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
-    private int id;
+    private Long id;
     private String name;
     private String lastName;
     private String email;
-    private City city;
-    private Role roleId;
-    private String image;
+    private String password;
+    private boolean enabled;
+    private City idCity;
+    private Role idRole;
+    private String idImage;
 
 }
