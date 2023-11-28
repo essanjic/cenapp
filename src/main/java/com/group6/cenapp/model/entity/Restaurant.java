@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,18 +18,23 @@ import java.util.List;
 @Entity
 @Table(name = "restaurant")
 public class Restaurant implements Serializable {
+
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @Column(name="restaurant_id", nullable = false, unique = true)
     private Integer id_restaurant;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String address;
     private String phone;
     private String description;
+
     @Column(name ="short_description" ,length = 50)
     private String short_description;
+
     @Column(name = "zone_street")
     private String zone_street;
 
@@ -36,11 +42,15 @@ public class Restaurant implements Serializable {
 
     @Column(name = "email_restaurant")
     private String email;
+
     @ElementCollection
+    @BatchSize(size = 50)  // Se puede hacer que en vez de ejecutar una consulta unitaria por restaurante la haga por lotes por ejemplo (50)
     @CollectionTable(name = "restaurant_day_disponibility", joinColumns = @JoinColumn(name = "restaurant_id"))
     @JsonProperty("day_disponibility")
     private List<String> day_disponibility;
+
     private boolean parking;
+
     @Column(name = "live_music")
     private boolean live_music;
 
@@ -51,21 +61,27 @@ public class Restaurant implements Serializable {
     private boolean active;
 
     private String area;
+
     @Column(name = "average_score")
     private Double average_score;
 
     private String latitude;
 
     private String longitude;
+
     @Column(name = "cancellation_policy")
     private String cancellation_policy;
+
     @Column(name = "hse_policy")
     private String hse_policy;
+
     @Column(name = "site_policy")
     private String site_policy;
+
     @ManyToOne
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "FK_restaurant_category"))
     private Category category;
+
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false, foreignKey = @ForeignKey(name = "FK_restaurant_city"))
     private City idCity;
@@ -76,8 +92,6 @@ public class Restaurant implements Serializable {
     @Transient
     @JsonProperty("city_id")
     private Integer cityId;
-
-
 
     @PrePersist
     public void prePersist() {
