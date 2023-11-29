@@ -83,7 +83,7 @@ public class Restaurant implements Serializable {
     public void prePersist() {
         if (cityId != null) {
             idCity = new City();
-            idCity.setIdCity(cityId);
+            idCity.setId_city(cityId);
         }
     }
 

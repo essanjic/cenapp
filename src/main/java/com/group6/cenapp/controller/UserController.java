@@ -11,6 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -28,6 +30,8 @@ public class UserController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    private UserDetailsService userDetailsService;
 
     @GetMapping("/welcome")
     public String welcome() {
@@ -75,6 +79,36 @@ public class UserController {
         Map<String, String> response = new HashMap<>();
         response.put("token", token);
         return response;
+    }
+
+    @GetMapping("/check-email")
+    public ResponseEntity<String> checkEmailAvailability(@RequestParam String email) {
+        boolean isAvailable = service.isEmailAvailable(email);
+
+        if (isAvailable) {
+            return new ResponseEntity<>("Email is available", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Email is not available", HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping("/check-jwt")
+    private ResponseEntity<Map<String, String>> isTokenValid(@RequestParam String token) {
+        Map<String, String> response = new HashMap<>();
+        try {
+            String username = jwtService.extractUsername(token);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+            if (jwtService.validateToken(token, userDetails)) {
+                response.put("status", "Token is valid");
+                return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+            }
+        } catch (Exception e) {
+            response.put("error", "Invalid token");
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        }
+        response.put("error", "Invalid token");
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
 
