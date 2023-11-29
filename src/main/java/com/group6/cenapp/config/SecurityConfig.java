@@ -45,8 +45,11 @@ public class SecurityConfig {
                         "/v1/api/restaurants/delete/{id}",
                         "/v1/api/restaurants/update",
                         "/v1/api/categories",
-                        "/auth/check-jwt/*",
-                        "/v1/api/categories/{id}")
+                        "/auth/check-jwt",
+                        "/v1/api/categories/{id}",
+                        "/v1/api/cities",
+                        "/v1/api/cities/{id}",
+                        "/v1/api/countries")
 
                 .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
