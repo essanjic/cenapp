@@ -20,7 +20,7 @@ public class Country implements Serializable{
     @Id
     @Column(name="country_id", nullable = false, unique = true, length = 100)
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Integer idCountry;
+    private Integer id_country;
     private String name;
     private String abbreviation;
 
@@ -28,11 +28,11 @@ public class Country implements Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Country country)) return false;
-        return Objects.equals(idCountry, country.idCountry) && Objects.equals(name, country.name) && Objects.equals(abbreviation, country.abbreviation);
+        return Objects.equals(id_country, country.id_country) && Objects.equals(name, country.name) && Objects.equals(abbreviation, country.abbreviation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCountry, name, abbreviation);
+        return Objects.hash(id_country, name, abbreviation);
     }
 }

@@ -36,5 +36,8 @@ public class UserInfoService implements UserDetailsService {
         return "User Added Successfully";
     }
 
+    public boolean isEmailAvailable(String email) {
+        return repository.isEmailAvailable(email);
+    }
 
 }

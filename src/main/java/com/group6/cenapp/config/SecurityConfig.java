@@ -39,12 +39,18 @@ public class SecurityConfig {
         return http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/v1/api/restaurants/create",
+                        "/v1/api/restaurants/pages",
                         "/v1/api/restaurants",
                         "v1/api/restaurants/{id}",
                         "/v1/api/restaurants/delete/{id}",
                         "/v1/api/restaurants/update",
                         "/v1/api/categories",
-                        "/v1/api/categories/{id}")
+                        "/auth/check-jwt",
+                        "/v1/api/categories/{id}",
+                        "/v1/api/cities",
+                        "/v1/api/cities/{id}",
+                        "/v1/api/countries")
+
                 .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
                 .and()

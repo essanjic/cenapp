@@ -7,6 +7,9 @@ import com.group6.cenapp.repository.CategoryRepository;
 import com.group6.cenapp.response.ApiResponseHandler;
 import com.group6.cenapp.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +36,15 @@ public class RestaurantController {
     public ResponseEntity<List<Restaurant>> listRestaurant() {
         return ResponseEntity.ok(restaurantService.getAllRestaurants());
     }
+
+    @GetMapping("/pages")
+    public ResponseEntity<Page<Restaurant>> getAllRestaurants(@RequestParam(defaultValue = "0") int page,
+                                                              @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Restaurant> restaurants = restaurantService.getAllRestaurants(pageable);
+        return ResponseEntity.ok().body(restaurants);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> findRestaurant(@PathVariable Integer id)  {
