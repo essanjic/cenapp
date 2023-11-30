@@ -10,6 +10,7 @@ import com.group6.cenapp.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/reservations")
+@RequestMapping("/v1/api/reservations")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReservationController  {
 
@@ -29,6 +30,7 @@ public class ReservationController  {
     private RestaurantService tableService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<Reservation>> listarResrevas() {
         return ResponseEntity.ok(reservationService.getAllReservation());
     }

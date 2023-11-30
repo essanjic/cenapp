@@ -58,7 +58,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests().requestMatchers("/auth/admin/**",
                         "/v1/api/categories/create",
-                        "/v1/api/categories/update").authenticated()
+                        "/v1/api/categories/update",
+                        "/v1/api/reservations").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
