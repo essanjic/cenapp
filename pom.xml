@@ -8,11 +8,11 @@
         <version>3.0.8</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.gfg</groupId>
-    <artifactId>springboot3-security</artifactId>
+    <groupId>group6</groupId>
+    <artifactId>cenapp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot3-security</name>
-    <description>Demo project for Spring Boot 3 Security</description>
+    <name>cenapp</name>
+    <description>Final project by gruop 6 to Digital House CTD</description>
     <properties>
         <java.version>17</java.version>
     </properties>

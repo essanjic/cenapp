@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebMvc
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.group6.cenapp"})
 public class cenapp{
 
     public static void main(String[] args) {
