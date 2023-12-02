@@ -49,7 +49,12 @@ public class SecurityConfig {
                         "/v1/api/categories/{id}",
                         "/auth/check-email/*",
                         "/auth/authenticate",
-                        "auth/get-user/{token}")
+                        "auth/get-user/{token}",
+                        "/auth/check-jwt",
+                        "/v1/api/categories/{id}",
+                        "/v1/api/cities",
+                        "/v1/api/cities/{id}",
+                        "/v1/api/countries")
                 .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
                 .and()

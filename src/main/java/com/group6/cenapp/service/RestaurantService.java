@@ -31,8 +31,6 @@ public class RestaurantService {
         return restaurantRepository.getByCategory(category);
     }
 
-
-
     public Optional<Restaurant> getRestaurantById(Integer id) {
         return restaurantRepository.findById(id);
     }

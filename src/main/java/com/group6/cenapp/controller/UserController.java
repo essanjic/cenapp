@@ -105,8 +105,8 @@ public class UserController {
         }
     }
 
-    @GetMapping("/check-jwt/{token}")
-    private ResponseEntity<Map<String, String>> isTokenValid(@PathVariable String token) {
+    @GetMapping("/check-jwt")
+    private ResponseEntity<Map<String, String>> isTokenValid(@RequestParam String token) {
         Map<String, String> response = new HashMap<>();
         try {
             String username = jwtService.extractUsername(token);
