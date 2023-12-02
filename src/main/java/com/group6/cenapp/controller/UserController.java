@@ -69,7 +69,20 @@ public class UserController {
         }
     }
 
-    private Authentication authenticateUser(AuthRequest authRequest) {
+
+
+
+
+
+
+
+
+
+
+    @GetMapping("/authenticate")
+    private Authentication authenticateUser(@RequestBody AuthRequest authRequest) {
+
+
         return authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
         );
@@ -81,11 +94,11 @@ public class UserController {
         return response;
     }
 
-    @GetMapping("/check-email")
-    public ResponseEntity<String> checkEmailAvailability(@RequestParam String email) {
+    @GetMapping("/check-email/{email}")
+    public ResponseEntity<String> checkEmailAvailability(@PathVariable String email) {
         boolean isAvailable = service.isEmailAvailable(email);
 
-        if (isAvailable) {
+        if (!isAvailable) {
             return new ResponseEntity<>("Email is available", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Email is not available", HttpStatus.CONFLICT);
@@ -110,6 +123,51 @@ public class UserController {
         response.put("error", "Invalid token");
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
+
+    /*
+    @GetMapping("/get-user/{token}")
+    public ResponseEntity<UserInfo> getUserInfoFromToken(@PathVariable String token) {
+
+        System.out.println(token);
+        try {
+            String username = jwtService.extractUsername(token);
+
+            System.out.println(username);
+
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+            System.out.println(userDetails);
+
+
+            if (jwtService.validateToken(token, userDetails)) {
+                UserInfo userInfo = service.getUserInfo(username);
+                return new ResponseEntity<>(userInfo, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+*/
+
+    @GetMapping("/get-user/{token}")
+    public ResponseEntity<UserInfo> getUserInfoFromToken(@PathVariable String token) {
+
+        System.out.println(token);
+        try {
+            String username = jwtService.extractUsername(token);
+            System.out.println(username);
+            if(!username.isEmpty()){
+                System.out.println(username);
+                UserInfo userInfo = service.getUserInfo(username);
+                return new ResponseEntity<>(userInfo,HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
 
 }
