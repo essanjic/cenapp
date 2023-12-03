@@ -46,6 +46,9 @@ public class SecurityConfig {
                         "/v1/api/restaurants/update",
                         "/v1/api/categories",
                         "/auth/check-jwt",
+                        "/auth/get-user/*",
+                        "/auth/check-email/*",
+
                         "/v1/api/categories/{id}",
                         "/v1/api/cities",
                         "/v1/api/cities/{id}",

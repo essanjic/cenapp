@@ -70,7 +70,10 @@ public class UserController {
         }
     }
 
-    private Authentication authenticateUser(AuthRequest authRequest) {
+
+
+    @GetMapping("/authenticate")
+    private Authentication authenticateUser(@RequestBody AuthRequest authRequest) {
         return authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
         );
@@ -82,35 +85,36 @@ public class UserController {
         return response;
     }
 
-    @GetMapping("/check-email")
-    public ResponseEntity<String> checkEmailAvailability(@RequestParam String email) {
+    @GetMapping("/check-email/{email}")
+    public ResponseEntity<String> checkEmailAvailability(@PathVariable String email) {
         boolean isAvailable = service.isEmailAvailable(email);
 
-        if (isAvailable) {
+        if (!isAvailable) {
             return new ResponseEntity<>("Email is available", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Email is not available", HttpStatus.CONFLICT);
         }
     }
 
-    @GetMapping("/check-jwt")
-    private ResponseEntity<Map<String, String>> isTokenValid(@RequestParam String token) {
-        Map<String, String> response = new HashMap<>();
+
+    @GetMapping("/get-user/{token}")
+    public ResponseEntity<UserInfo> getUserInfoFromToken(@PathVariable String token) {
+
+        System.out.println(token);
         try {
             String username = jwtService.extractUsername(token);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-            if (jwtService.validateToken(token, userDetails)) {
-                response.put("status", "Token is valid");
-                return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+            System.out.println(username);
+            if(!username.isEmpty()){
+                System.out.println(username);
+                UserInfo userInfo = service.getUserInfo(username);
+                return new ResponseEntity<>(userInfo,HttpStatus.OK);
             }
         } catch (Exception e) {
-            response.put("error", "Invalid token");
-            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        response.put("error", "Invalid token");
-        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 
 
 }

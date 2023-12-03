@@ -41,6 +41,11 @@ public class UserInfoService implements UserDetailsService {
         Optional<UserInfo> entityOptional = repository.findByEmail(email);
         return entityOptional.orElseThrow(() -> new ResourceNotFoundException("Entity not found with email: " + email));
     }
+    public UserInfo getUserInfo(String email) throws UsernameNotFoundException {
+        Optional<UserInfo> userInfo = repository.findByEmail(email);
+        return userInfo.orElseThrow(() -> new UsernameNotFoundException("email not found " + email));
+    }
+
 
     public String addUser(UserInfo userInfo) throws RegisterErrorException {
         Optional<UserInfo> existingUserByEmail = repository.findByEmail(userInfo.getEmail());
@@ -49,7 +54,6 @@ public class UserInfoService implements UserDetailsService {
         }
         userInfo.setPassword(encoder.encode(userInfo.getPassword()));
         repository.save(userInfo);
-
         return "User Added Successfully";
     }
     public String switchUserRole(Integer id) {
