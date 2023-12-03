@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "578d4853-caaf-4369-a615-93f56f1ef949",
+		"_postman_id": "fee54369-ab9a-4907-8a3f-79affec1fef6",
 		"name": "cenapp test backend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24706753"
@@ -45,7 +45,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Ael\",\r\n    \"lastname\": \"JC\",\r\n    \"email\": \"ael@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave123\",\r\n    \"roles\": \"ROLE_ADMIN\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Ael\",\r\n    \"last_name\": \"JC\",\r\n    \"email\": \"ael@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave123\",\r\n    \"roles\": \"ROLE_ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -565,13 +565,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080//v1/api/restaurants/category/1",
+							"raw": "localhost:8080/v1/api/restaurants/category/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"",
 								"v1",
 								"api",
 								"restaurants",
@@ -590,7 +589,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZWxAc295dW5hcHJ1ZWJhLmNvbSIsImlhdCI6MTcwMTYyNzIzNCwiZXhwIjoxNzAxNjI5MDM0fQ.lU1zFEG660SXMgU8RcW7o9XrZ8OheDOameQooSbb5hE",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZWxAc295dW5hcHJ1ZWJhLmNvbSIsImlhdCI6MTcwMTYzMzEyMCwiZXhwIjoxNzAxNjM0OTIwfQ.FGz4ujd9oUFStNMAhfTa6srsUZ7--NakZSneHo49_BQ",
 									"type": "string"
 								}
 							]
@@ -599,7 +598,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Prueba 1\",\r\n    \"description\": \"Hola soy Manu\",\r\n    \"short_description\": \"Hola soy ...\",\r\n    \"address\": \"Calle 123\",\r\n    \"phone\": \"+549323321234\",\r\n    \"zone_street\": \"Zona prueba\",\r\n    \"rating\": 4.5,\r\n    \"day_disponibility\": [\r\n        {\r\n            \"day_of_week\": \"MONDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"TUESDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"WEDNESDAY\",\r\n            \"open\": false,\r\n            \"open_hour\": null,\r\n            \"close_hour\": null\r\n        },\r\n        {\r\n            \"day_of_week\": \"THURSDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"FRIDAY\",\r\n            \"open\": false,\r\n            \"open_hour\": null,\r\n            \"close_hour\": null\r\n        },\r\n        {\r\n            \"day_of_week\": \"SATURDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"SUNDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"18:00\"\r\n        }\r\n    ],\r\n    \"category_restaurant\": {\r\n        \"parking\": true,\r\n        \"live_music\": true,\r\n        \"events\": true,\r\n        \"terrace\": false,\r\n        \"wifi\": true\r\n    },\r\n    \"active\": true,\r\n    \"area\": \"10 m2\",\r\n    \"average_score\": 4.5,\r\n    \"latitude\": \"prueba1\",\r\n    \"longitude\": \"Prueba2\",\r\n    \"cancellation_policy\": \"soy una prueba de políticas de cancelación\",\r\n    \"hse_policy\": \"hse_policies prueba\",\r\n    \"site_policy\": \"site_policies prueba\",\r\n    \"email\": \"soy@unaprueba.com\",\r\n    \"category\": {\r\n        \"category\": 1,\r\n        \"name\": \"Comida de Mar\",\r\n        \"description\": \"soy una categoria\",\r\n        \"short_description\": \"aksjdaksljd\",\r\n        \"food_type\": \"Mesa 1\",\r\n        \"image\": null\r\n    },\r\n    \"city_id\": 1,\r\n    \"image\": \"imagenescrucks\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Prueba 1\",\r\n    \"description\": \"Hola soy Manu\",\r\n    \"short_description\": \"Hola soy ...\",\r\n    \"address\": \"Calle 123\",\r\n    \"phone\": \"+549323321234\",\r\n    \"zone_street\": \"Zona prueba\",\r\n    \"rating\": 4.5,\r\n    \"day_disponibility\": [\r\n        {\r\n            \"day_of_week\": \"MONDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"TUESDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"WEDNESDAY\",\r\n            \"open\": false,\r\n            \"open_hour\": null,\r\n            \"close_hour\": null\r\n        },\r\n        {\r\n            \"day_of_week\": \"THURSDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"FRIDAY\",\r\n            \"open\": false,\r\n            \"open_hour\": null,\r\n            \"close_hour\": null\r\n        },\r\n        {\r\n            \"day_of_week\": \"SATURDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"SUNDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"18:00\"\r\n        }\r\n    ],\r\n    \"category_restaurant\": {\r\n        \"parking\": true,\r\n        \"live_music\": true,\r\n        \"events\": true,\r\n        \"terrace\": false,\r\n        \"wifi\": true\r\n    },\r\n    \"active\": true,\r\n    \"area\": \"10 m2\",\r\n    \"average_score\": 4.5,\r\n    \"latitude\": \"prueba1\",\r\n    \"longitude\": \"Prueba2\",\r\n    \"cancellation_policy\": \"soy una prueba de políticas de cancelación\",\r\n    \"hse_policy\": \"hse_policies prueba\",\r\n    \"site_policy\": \"site_policies prueba\",\r\n    \"email\": \"soy@unaprueba.com\",\r\n    \"category\": {\r\n        \"category\": 1,\r\n        \"name\": \"comida de mar\",\r\n        \"description\": \"Soy una completa descripción\",\r\n        \"short_description\": \"Soy una short...\",\r\n        \"food_type\": \"Soy un tipo de comida\",\r\n        \"image\": null\r\n    },\r\n    \"city_id\": 1,\r\n    \"image\": \"imagenescrucks\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

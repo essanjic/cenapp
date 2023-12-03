@@ -6,6 +6,7 @@ import com.group6.cenapp.model.entity.Restaurant;
 import com.group6.cenapp.repository.CategoryRepository;
 import com.group6.cenapp.response.ApiResponseHandler;
 import com.group6.cenapp.service.RestaurantService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -67,27 +68,10 @@ public class RestaurantController {
 
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) {
-        if (restaurant.getCategory() == null || restaurant.getCategory().getCategory() == null) {
-
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-
-        Integer categoryId = restaurant.getCategory().getCategory();
-
-        Category existingCategory = categoryRepository.findById(categoryId).orElse(null);
-
-        if (existingCategory == null) {
-
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-
-        restaurant.setCategory(existingCategory);
-
-        Restaurant savedRestaurant = restaurantService.saveRestaurant(restaurant);
-
-        return ResponseEntity.ok(savedRestaurant);
+    public ResponseEntity<Restaurant> createRestaurant(@Valid @RequestBody Restaurant restaurant) {
+        return ResponseEntity.ok(restaurantService.saveRestaurant(restaurant));
     }
+
 
     @PutMapping("/update")
     public ResponseEntity<?> editRestaurantta(@RequestBody Restaurant restaurant) throws Exception{

@@ -1,6 +1,5 @@
 package com.group6.cenapp.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,22 +54,9 @@ public class Restaurant implements Serializable {
     @ManyToOne
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "FK_restaurant_category"))
     private Category category;
-    @ManyToOne
     @JoinColumn(name = "city_id", nullable = false, foreignKey = @ForeignKey(name = "FK_restaurant_city"))
-    private City idCity;
+    private Integer city_id;
     @Column(name = "image")
     private String image;
-    @Transient
-    @JsonProperty("city_id")
-    private Integer cityId;
-
-
-    @PrePersist
-    public void prePersist() {
-        if (cityId != null) {
-            idCity = new City();
-            idCity.setId_city(cityId);
-        }
-    }
 
 }

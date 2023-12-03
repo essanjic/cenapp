@@ -17,7 +17,8 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String lastName;
+    @Column(name = "last_name")
+    private String last_name;
     @Column(unique = true)
     @NonNull
     private String email;
