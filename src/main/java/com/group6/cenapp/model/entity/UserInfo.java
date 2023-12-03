@@ -3,7 +3,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -18,8 +19,10 @@ public class UserInfo {
     private String name;
     private String lastName;
     @Column(unique = true)
-    @NonNull
+    @NotNull
     private String email;
+    @NotNull
+    @JsonIgnore
     private String password;
     private String roles;
 }

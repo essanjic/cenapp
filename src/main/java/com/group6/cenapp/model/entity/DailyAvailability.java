@@ -1,6 +1,6 @@
 package com.group6.cenapp.model.entity;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +13,16 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "daily_availability")
 public class DailyAvailability {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_availability;
 
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "day_of_week")
+    private DayOfWeek dayOfWeek;
     private boolean open;
     private LocalTime openHour;
     private LocalTime closeHour;

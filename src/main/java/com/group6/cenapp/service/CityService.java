@@ -28,9 +28,9 @@ public class CityService {
         return cityRepository.findById(id);
     }
 
-    /*public List<Country> findAllByCountryId(Integer countryId) {
-        return countryRepository.findAllByCountryId(countryId);
-    }*/
+    public List<City> findAllByCountryId(Integer id_country) {
+        return cityRepository.findAllByCountryId(id_country);
+    }
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
     }

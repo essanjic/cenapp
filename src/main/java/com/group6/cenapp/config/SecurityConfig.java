@@ -49,7 +49,8 @@ public class SecurityConfig {
                         "/v1/api/categories/{id}",
                         "/v1/api/cities",
                         "/v1/api/cities/{id}",
-                        "/v1/api/countries")
+                        "/v1/api/countries",
+                        "/v1/api/countries/{id_country}/cities")
 
                 .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()

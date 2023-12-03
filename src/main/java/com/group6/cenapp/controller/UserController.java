@@ -1,5 +1,6 @@
 package com.group6.cenapp.controller;
 
+import com.group6.cenapp.exception.RegisterErrorException;
 import com.group6.cenapp.model.entity.AuthRequest;
 import com.group6.cenapp.model.entity.UserInfo;
 import com.group6.cenapp.service.JwtService;
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/addNewUser")
-    public String addNewUser(@RequestBody UserInfo userInfo) {
+    public String addNewUser(@RequestBody UserInfo userInfo) throws RegisterErrorException {
         return service.addUser(userInfo);
     }
 
@@ -61,7 +62,7 @@ public class UserController {
         Authentication authentication = authenticateUser(authRequest);
 
         if (authentication.isAuthenticated()) {
-            String token = jwtService.generateToken(authRequest.getUsername());
+            String token = jwtService.generateToken(authRequest.getEmail());
             Map<String, String> response = createTokenResponse(token);
             return ResponseEntity.ok(response);
         } else {
@@ -71,7 +72,7 @@ public class UserController {
 
     private Authentication authenticateUser(AuthRequest authRequest) {
         return authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
         );
     }
 

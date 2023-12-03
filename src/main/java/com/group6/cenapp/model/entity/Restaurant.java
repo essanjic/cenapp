@@ -31,31 +31,22 @@ public class Restaurant implements Serializable {
     private String short_description;
     @Column(name = "zone_street")
     private String zone_street;
-
     private Double rating;
-
     @Column(name = "email_restaurant")
     private String email;
     @ElementCollection
-    @CollectionTable(name = "restaurant_day_disponibility", joinColumns = @JoinColumn(name = "restaurant_id"))
-    @JsonProperty("day_disponibility")
-    private List<String> day_disponibility;
+    @CollectionTable(name = "restaurant_availability", joinColumns = @JoinColumn(name = "restaurant_id"))
+    private List<DailyAvailability> day_disponibility;
     private boolean parking;
     @Column(name = "live_music")
     private boolean live_music;
-
     private boolean terrace;
-
     private boolean events;
-
     private boolean active;
-
     private String area;
     @Column(name = "average_score")
     private Double average_score;
-
     private String latitude;
-
     private String longitude;
     @Column(name = "cancellation_policy")
     private String cancellation_policy;
@@ -69,14 +60,11 @@ public class Restaurant implements Serializable {
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false, foreignKey = @ForeignKey(name = "FK_restaurant_city"))
     private City idCity;
-
     @Column(name = "image")
     private String image;
-
     @Transient
     @JsonProperty("city_id")
     private Integer cityId;
-
 
 
     @PrePersist

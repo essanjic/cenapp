@@ -92,9 +92,8 @@ public class RestaurantController {
         return ResponseEntity.ok(savedRestaurant);
     }
 
-
     @PutMapping("/update")
-    public ResponseEntity<?> editRestaurant(@RequestBody Restaurant restaurant) throws Exception{
+    public ResponseEntity<?> editRestaurantta(@RequestBody Restaurant restaurant) throws Exception{
         Optional<Restaurant> productoBuscado = restaurantService.getRestaurantById(restaurant.getId_restaurant());
         if(productoBuscado.isPresent()){
             return ResponseEntity.ok(restaurantService.updateRestaurant(restaurant));
