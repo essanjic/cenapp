@@ -35,13 +35,11 @@ public class Restaurant implements Serializable {
     @Column(name = "email_restaurant")
     private String email;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "restaurante_id")
+    @JoinColumn(name = "restaurant_id")
     private List<DailyAvailability> day_disponibility;
-    private boolean parking;
-    @Column(name = "live_music")
-    private boolean live_music;
-    private boolean terrace;
-    private boolean events;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_restaurant", foreignKey = @ForeignKey(name = "FK_restaurant_category_restaurant"))
+    private CategoryRestaurant category_restaurant;
     private boolean active;
     private String area;
     @Column(name = "average_score")

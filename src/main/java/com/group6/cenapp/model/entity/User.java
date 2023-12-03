@@ -1,10 +1,6 @@
 package com.group6.cenapp.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.*;
-
-@Getter
+/*@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,4 +38,4 @@ public class User {
     public Role getRole() {
         return idRole;
     }
-}
+}*/

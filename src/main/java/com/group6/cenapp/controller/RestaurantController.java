@@ -69,24 +69,21 @@ public class RestaurantController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) {
         if (restaurant.getCategory() == null || restaurant.getCategory().getCategory() == null) {
-            // Manejar el caso en que la categoría no está presente en el cuerpo de la solicitud
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
         Integer categoryId = restaurant.getCategory().getCategory();
 
-        // Obtener la categoría existente por su ID
         Category existingCategory = categoryRepository.findById(categoryId).orElse(null);
 
         if (existingCategory == null) {
-            // Manejar el caso donde la categoría no se encuentra
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        // Asociar la categoría existente al restaurante
         restaurant.setCategory(existingCategory);
 
-        // Guardar el restaurante
         Restaurant savedRestaurant = restaurantService.saveRestaurant(restaurant);
 
         return ResponseEntity.ok(savedRestaurant);
@@ -94,8 +91,8 @@ public class RestaurantController {
 
     @PutMapping("/update")
     public ResponseEntity<?> editRestaurantta(@RequestBody Restaurant restaurant) throws Exception{
-        Optional<Restaurant> productoBuscado = restaurantService.getRestaurantById(restaurant.getId_restaurant());
-        if(productoBuscado.isPresent()){
+        Optional<Restaurant> restaurantSearched = restaurantService.getRestaurantById(restaurant.getId_restaurant());
+        if(restaurantSearched.isPresent()){
             return ResponseEntity.ok(restaurantService.updateRestaurant(restaurant));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El restaurante con ID: " + restaurant.getId_restaurant() + " no se encuentra ");

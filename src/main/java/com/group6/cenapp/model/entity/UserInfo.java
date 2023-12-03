@@ -1,6 +1,5 @@
 package com.group6.cenapp.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +22,6 @@ public class UserInfo {
     @NonNull
     private String email;
     @NonNull
-    @JsonIgnore
     private String password;
     private String roles;
 }
