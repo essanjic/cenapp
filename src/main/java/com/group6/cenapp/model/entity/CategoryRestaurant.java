@@ -7,25 +7,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Embeddable
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "daily_availability")
-public class DailyAvailability {
+@Table(name = "category_restaurant")
+public class CategoryRestaurant {
     @Id
     @JsonIgnore
+    @Column(name = "category_restaurant_id")
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Integer id_availability;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "day_of_week")
-    private DayOfWeek day_of_week;
-    private boolean open;
-    @Column(name = "open_hour")
-    private String open_hour;
-    @Column(name = "close_hour")
-    private String close_hour;
-
+    private Integer category_restaurant_id;
+    private boolean parking;
+    @Column(name = "live_music")
+    private boolean live_music;
+    private boolean terrace;
+    private boolean events;
+    private boolean wifi;
 }

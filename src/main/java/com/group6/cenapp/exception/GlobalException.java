@@ -29,4 +29,9 @@ public class GlobalException {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
 
+    @ExceptionHandler({RegisterErrorException.class})
+    public ResponseEntity<String> registerErrorException(RegisterErrorException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
+
 }

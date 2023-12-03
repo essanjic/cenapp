@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/addNewUser")
-    public String addNewUser(@RequestBody UserInfo userInfo) {
+    public String addNewUser(@RequestBody UserInfo userInfo) throws RegisterErrorException {
         return service.addUser(userInfo);
     }
 
@@ -61,7 +61,7 @@ public class UserController {
         Authentication authentication = authenticateUser(authRequest);
 
         if (authentication.isAuthenticated()) {
-            String token = jwtService.generateToken(authRequest.getUsername());
+            String token = jwtService.generateToken(authRequest.getEmail());
             Map<String, String> response = createTokenResponse(token);
             return ResponseEntity.ok(response);
         } else {
@@ -81,10 +81,8 @@ public class UserController {
 
     @GetMapping("/authenticate")
     private Authentication authenticateUser(@RequestBody AuthRequest authRequest) {
-
-
         return authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
         );
     }
 
@@ -105,50 +103,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("/check-jwt")
-    private ResponseEntity<Map<String, String>> isTokenValid(@RequestParam String token) {
-        Map<String, String> response = new HashMap<>();
-        try {
-            String username = jwtService.extractUsername(token);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-            if (jwtService.validateToken(token, userDetails)) {
-                response.put("status", "Token is valid");
-                return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
-            }
-        } catch (Exception e) {
-            response.put("error", "Invalid token");
-            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
-        }
-        response.put("error", "Invalid token");
-        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
-    }
-
-    /*
-    @GetMapping("/get-user/{token}")
-    public ResponseEntity<UserInfo> getUserInfoFromToken(@PathVariable String token) {
-
-        System.out.println(token);
-        try {
-            String username = jwtService.extractUsername(token);
-
-            System.out.println(username);
-
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-            System.out.println(userDetails);
-
-
-            if (jwtService.validateToken(token, userDetails)) {
-                UserInfo userInfo = service.getUserInfo(username);
-                return new ResponseEntity<>(userInfo, HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-*/
 
     @GetMapping("/get-user/{token}")
     public ResponseEntity<UserInfo> getUserInfoFromToken(@PathVariable String token) {

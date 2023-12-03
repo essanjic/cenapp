@@ -31,31 +31,20 @@ public class Restaurant implements Serializable {
     private String short_description;
     @Column(name = "zone_street")
     private String zone_street;
-
     private Double rating;
-
     @Column(name = "email_restaurant")
     private String email;
-    @ElementCollection
-    @CollectionTable(name = "restaurant_day_disponibility", joinColumns = @JoinColumn(name = "restaurant_id"))
-    @JsonProperty("day_disponibility")
-    private List<String> day_disponibility;
-    private boolean parking;
-    @Column(name = "live_music")
-    private boolean live_music;
-
-    private boolean terrace;
-
-    private boolean events;
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurant_id")
+    private List<DailyAvailability> day_disponibility;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_restaurant", foreignKey = @ForeignKey(name = "FK_restaurant_category_restaurant"))
+    private CategoryRestaurant category_restaurant;
     private boolean active;
-
     private String area;
     @Column(name = "average_score")
     private Double average_score;
-
     private String latitude;
-
     private String longitude;
     @Column(name = "cancellation_policy")
     private String cancellation_policy;
@@ -66,25 +55,9 @@ public class Restaurant implements Serializable {
     @ManyToOne
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "FK_restaurant_category"))
     private Category category;
-    @ManyToOne
     @JoinColumn(name = "city_id", nullable = false, foreignKey = @ForeignKey(name = "FK_restaurant_city"))
-    private City idCity;
-
+    private Integer city_id;
     @Column(name = "image")
     private String image;
-
-    @Transient
-    @JsonProperty("city_id")
-    private Integer cityId;
-
-
-
-    @PrePersist
-    public void prePersist() {
-        if (cityId != null) {
-            idCity = new City();
-            idCity.setId_city(cityId);
-        }
-    }
 
 }

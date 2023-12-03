@@ -1,4 +1,5 @@
 package com.group6.cenapp.model.entity;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,10 +17,12 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String lastName;
+    @Column(name = "last_name")
+    private String last_name;
     @Column(unique = true)
     @NonNull
     private String email;
+    @NonNull
     private String password;
     private String roles;
 }

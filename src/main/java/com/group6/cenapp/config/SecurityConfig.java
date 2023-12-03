@@ -45,16 +45,16 @@ public class SecurityConfig {
                         "/v1/api/restaurants/delete/{id}",
                         "/v1/api/restaurants/update",
                         "/v1/api/categories",
-                        "/auth/get-user/*",
-                        "/v1/api/categories/{id}",
-                        "/auth/check-email/*",
-                        "/auth/authenticate",
-                        "auth/get-user/{token}",
                         "/auth/check-jwt",
+                        "/auth/get-user/*",
+                        "/auth/check-email/*",
+
                         "/v1/api/categories/{id}",
                         "/v1/api/cities",
                         "/v1/api/cities/{id}",
-                        "/v1/api/countries")
+                        "/v1/api/countries",
+                        "/v1/api/countries/{id_country}/cities")
+
                 .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
                 .and()
@@ -62,7 +62,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests().requestMatchers("/auth/admin/**",
                         "/v1/api/categories/create",
-                        "/v1/api/categories/update").authenticated()
+                        "/v1/api/categories/update",
+                        "/v1/api/reservations").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
