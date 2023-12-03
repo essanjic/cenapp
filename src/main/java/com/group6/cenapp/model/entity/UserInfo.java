@@ -1,10 +1,11 @@
 package com.group6.cenapp.model.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.NonNull;
 
 @Entity
 @Data
@@ -19,9 +20,9 @@ public class UserInfo {
     private String name;
     private String lastName;
     @Column(unique = true)
-    @NotNull
+    @NonNull
     private String email;
-    @NotNull
+    @NonNull
     @JsonIgnore
     private String password;
     private String roles;

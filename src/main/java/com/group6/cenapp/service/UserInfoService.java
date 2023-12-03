@@ -24,6 +24,7 @@ public class UserInfoService implements UserDetailsService {
     private UserInfoRepository repository;
     @Autowired
     private JwtService jwtService;
+
     @Autowired
     private ModelMapper modelMapper;
     @Autowired

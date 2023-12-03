@@ -34,8 +34,8 @@ public class Restaurant implements Serializable {
     private Double rating;
     @Column(name = "email_restaurant")
     private String email;
-    @ElementCollection
-    @CollectionTable(name = "restaurant_availability", joinColumns = @JoinColumn(name = "restaurant_id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurante_id")
     private List<DailyAvailability> day_disponibility;
     private boolean parking;
     @Column(name = "live_music")
