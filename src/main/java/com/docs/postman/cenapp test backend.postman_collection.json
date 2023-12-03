@@ -7,255 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Users",
-			"item": [
-				{
-					"name": "Get all users",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Código de estado debe ser 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"La respuesta debe ser un arreglo\", function () {\r",
-									"    pm.response.to.be.json;\r",
-									"    pm.response.to.be.an('array');\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Debe haber al menos un elemento en la respuesta\", function () {\r",
-									"    pm.expect(pm.response.json()).to.have.length.above(0);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "2612d386-8b46-40d1-a2de-a407d8513661",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "user",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Trans",
-								"value": "chunked",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "localhost:8080/v1/api/users",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get id user",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "2612d386-8b46-40d1-a2de-a407d8513661",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "user",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/v1/api/users/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"api",
-								"users",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Response code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "bce50d31-0b39-429d-ab63-9b282e9066b0",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "user",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Marco\",\r\n    \"lastname\": \"Pipolo 2\",\r\n    \"email\": \"marcopipolo@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave123\",\r\n    \"enabled\": true,\r\n    \"city_id\": \r\n    {\r\n        \"id\":1,\r\n        \"name\": \"Bogotá D.C\",\r\n        \"abbreviation\": \"BOG\"\r\n        },\r\n    \"role_id\": {\r\n     \"id\": 1,\r\n     \"name\": \"USER\"   \r\n    },\r\n    \"image_id\": {\r\n        \"id\": 1\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/auth/addNewUser",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"auth",
-								"addNewUser"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Auth User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Response code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "bce50d31-0b39-429d-ab63-9b282e9066b0",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "user",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Marco\",\r\n    \"lastname\": \"Pipolo\",\r\n    \"email\": \"marcopipolo@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave123\",\r\n    \"roles\": \"ROLE_ADMIN\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/auth/addNewUser",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"auth",
-								"addNewUser"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/v1/api/users/delete/7",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"api",
-								"users",
-								"delete",
-								"7"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Users Auth",
 			"item": [
 				{
@@ -294,7 +45,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"PibeLomos\",\r\n    \"lastname\": \"Pipolo\",\r\n    \"email\": \"pibelomos@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave\",\r\n    \"roles\": \"ROLE_ADMIN\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Ael\",\r\n    \"lastname\": \"JC\",\r\n    \"email\": \"ael@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave123\",\r\n    \"roles\": \"ROLE_ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -351,19 +102,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "2612d386-8b46-40d1-a2de-a407d8513661",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "user",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [
@@ -375,7 +114,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Pibe\",\r\n    \"password\": \"Soyunaclave\"\r\n}",
+							"raw": "{\r\n    \"email\": \"ael@soyunaprueba.com\",\r\n    \"password\": \"Soyunaclave123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -476,6 +215,119 @@
 								"users",
 								"delete",
 								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWJlIiwiaWF0IjoxNzAxMTQwNjYwLCJleHAiOjE3MDExNDI0NjB9.fh9HHj8oEAjEgnhFwCR95aB33D8bG458wUXqrwiCydg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/check-jwt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"check-jwt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Countries and Cities",
+			"item": [
+				{
+					"name": "Get All Countries",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/api/countries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All cities",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/api/cities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cities by country",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/countries/1/cities",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"countries",
+								"1",
+								"cities"
 							]
 						}
 					},
@@ -738,7 +590,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJjbyIsImlhdCI6MTcwMDc2NzU3MywiZXhwIjoxNzAwNzY5MzczfQ.sZSbJLltRuSOhOdS4eshoNr_YQmKocpuHGv1oCmmN_Q",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZWxAc295dW5hcHJ1ZWJhLmNvbSIsImlhdCI6MTcwMTYyNzIzNCwiZXhwIjoxNzAxNjI5MDM0fQ.lU1zFEG660SXMgU8RcW7o9XrZ8OheDOameQooSbb5hE",
 									"type": "string"
 								}
 							]
@@ -747,7 +599,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Prueba 1\",\r\n    \"description\": \"Hola soy Manu\",\r\n    \"short_description\": \"Hola soy ...\",\r\n    \"address\": \"Calle 123\",\r\n    \"phone\": \"+549323321234\",\r\n    \"zone_street\": \"Zona prueba\",\r\n    \"rating\": 4.5,\r\n    \"dayDisponibility\": [\r\n        {\r\n            \"dayOfWeek\": \"MONDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"20:00\"\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"TUESDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"20:00\"\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"WEDNESDAY\",\r\n            \"open\": false,\r\n            \"openHour\": null,\r\n            \"closeHour\": null\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"THURSDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"20:00\"\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"FRIDAY\",\r\n            \"open\": false,\r\n            \"openHour\": null,\r\n            \"closeHour\": null\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"SATURDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"20:00\"\r\n        },\r\n        {\r\n            \"dayOfWeek\": \"SUNDAY\",\r\n            \"open\": true,\r\n            \"openHour\": \"12:00\",\r\n            \"closeHour\": \"18:00\"\r\n        }\r\n    ],\r\n    \"parking\": true,\r\n    \"live_music\": true,\r\n    \"events\": true,\r\n    \"terrace\": false,\r\n    \"active\": true,\r\n    \"area\": \"10 m2\",\r\n    \"average_score\": 4.5,\r\n    \"latitude\": \"prueba1\",\r\n    \"longitude\": \"Prueba2\",\r\n    \"cancellation_policy\": \"soy una prueba de políticas de cancelación\",\r\n    \"hse_policy\": \"hse_policies prueba\",\r\n    \"site_policy\": \"site_policies prueba\",\r\n    \"email\": \"soy@unaprueba.com\",\r\n    \"category\": {\r\n        \"category\": 1,\r\n        \"name\": \"Comida de Mar\",\r\n        \"description\": \"soy una categoria\",\r\n        \"short_description\": \"aksjdaksljd\",\r\n        \"food_type\": \"Mesa 1\",\r\n        \"image\": null\r\n    },\r\n    \"city_id\": 1,\r\n    \"image\": \"imagenescrucks\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Prueba 1\",\r\n    \"description\": \"Hola soy Manu\",\r\n    \"short_description\": \"Hola soy ...\",\r\n    \"address\": \"Calle 123\",\r\n    \"phone\": \"+549323321234\",\r\n    \"zone_street\": \"Zona prueba\",\r\n    \"rating\": 4.5,\r\n    \"day_disponibility\": [\r\n        {\r\n            \"day_of_week\": \"MONDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"TUESDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"WEDNESDAY\",\r\n            \"open\": false,\r\n            \"open_hour\": null,\r\n            \"close_hour\": null\r\n        },\r\n        {\r\n            \"day_of_week\": \"THURSDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"FRIDAY\",\r\n            \"open\": false,\r\n            \"open_hour\": null,\r\n            \"close_hour\": null\r\n        },\r\n        {\r\n            \"day_of_week\": \"SATURDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"20:00\"\r\n        },\r\n        {\r\n            \"day_of_week\": \"SUNDAY\",\r\n            \"open\": true,\r\n            \"open_hour\": \"12:00\",\r\n            \"close_hour\": \"18:00\"\r\n        }\r\n    ],\r\n    \"category_restaurant\": {\r\n        \"parking\": true,\r\n        \"live_music\": true,\r\n        \"events\": true,\r\n        \"terrace\": false,\r\n        \"wifi\": true\r\n    },\r\n    \"active\": true,\r\n    \"area\": \"10 m2\",\r\n    \"average_score\": 4.5,\r\n    \"latitude\": \"prueba1\",\r\n    \"longitude\": \"Prueba2\",\r\n    \"cancellation_policy\": \"soy una prueba de políticas de cancelación\",\r\n    \"hse_policy\": \"hse_policies prueba\",\r\n    \"site_policy\": \"site_policies prueba\",\r\n    \"email\": \"soy@unaprueba.com\",\r\n    \"category\": {\r\n        \"category\": 1,\r\n        \"name\": \"Comida de Mar\",\r\n        \"description\": \"soy una categoria\",\r\n        \"short_description\": \"aksjdaksljd\",\r\n        \"food_type\": \"Mesa 1\",\r\n        \"image\": null\r\n    },\r\n    \"city_id\": 1,\r\n    \"image\": \"imagenescrucks\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -784,7 +636,7 @@
 								}
 							]
 						},
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -936,14 +788,14 @@
 			"name": "Reservas",
 			"item": [
 				{
-					"name": "Listar reservas",
+					"name": "Listar todas las reservas (Admin)",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSZWxvY28xIiwiaWF0IjoxNzAxMzg1ODY3LCJleHAiOjE3MDEzODc2Njd9.Z-fWXp6fHb3Wc4_F5xSQbLBESXNoVaAyGxBzsIjJbcQ",
 									"type": "string"
 								}
 							]
@@ -951,11 +803,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/reservations",
+							"raw": "localhost:8080/v1/api/reservations",
 							"host": [
-								"{{url}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"v1",
+								"api",
 								"reservations"
 							]
 						}
@@ -970,7 +825,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{token}}",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSZWxvY28iLCJpYXQiOjE3MDEzODQxODEsImV4cCI6MTcwMTM4NTk4MX0.mNrnT-mktBoN-YYklp8ff8b6iHDkLqpemRmnQkkqkrQ",
 									"type": "string"
 								}
 							]
@@ -987,11 +842,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/reservations/create",
+							"raw": "localhost:8080/v1/api/reservations/create",
 							"host": [
-								"{{url}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
+								"v1",
+								"api",
 								"reservations",
 								"create"
 							]
@@ -1000,7 +858,39 @@
 					"response": []
 				},
 				{
-					"name": "Buscar Reserva por ID de Producto",
+					"name": "Buscar Reserva por ID de User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSZWxvY28iLCJpYXQiOjE3MDEzODM3MDEsImV4cCI6MTcwMTM4NTUwMX0.dzIRl0dm-rg5FBOfDnjmsnmYnGwfemXjcm-z8H8PGSA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/api/reservations/users/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"reservations",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Reserva por U",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1023,35 +913,6 @@
 								"reservations",
 								"product",
 								"4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar Reserva por ID de User",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/reservations/user/6",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"reservations",
-								"user",
-								"6"
 							]
 						}
 					},
