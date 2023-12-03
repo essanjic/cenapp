@@ -1,5 +1,6 @@
 package com.group6.cenapp.controller;
 
+import com.group6.cenapp.exception.RegisterErrorException;
 import com.group6.cenapp.model.entity.AuthRequest;
 import com.group6.cenapp.model.entity.UserInfo;
 import com.group6.cenapp.service.JwtService;
@@ -68,14 +69,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o contraseña inválidos");
         }
     }
-
-
-
-
-
-
-
-
 
 
 

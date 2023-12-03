@@ -1,5 +1,8 @@
 package com.group6.cenapp.service;
 
+import com.group6.cenapp.exception.RegisterErrorException;
+import com.group6.cenapp.exception.ResourceNotFoundException;
+import com.group6.cenapp.model.dto.UserInfoDTO;
 import com.group6.cenapp.model.entity.UserInfo;
 import com.group6.cenapp.repository.UserInfoRepository;
 import org.modelmapper.ModelMapper;
@@ -38,9 +41,9 @@ public class UserInfoService implements UserDetailsService {
         Optional<UserInfo> entityOptional = repository.findByEmail(email);
         return entityOptional.orElseThrow(() -> new ResourceNotFoundException("Entity not found with email: " + email));
     }
-    public UserInfo getUserInfo(String username) throws UsernameNotFoundException {
-        Optional<UserInfo> userInfo = repository.findByName(username);
-        return userInfo.orElseThrow(() -> new UsernameNotFoundException("User not found " + username));
+    public UserInfo getUserInfo(String email) throws UsernameNotFoundException {
+        Optional<UserInfo> userInfo = repository.findByEmail(email);
+        return userInfo.orElseThrow(() -> new UsernameNotFoundException("email not found " + email));
     }
 
 
