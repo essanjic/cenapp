@@ -26,7 +26,7 @@ public class ImageService {
         this.imageConverter = imageConverter;
     }
 
-    public void associateImagesToRestaurant(List<Long> imageIds, Long restaurantId) {
+    public void associateImagesToRestaurant(List<Long> imageIds, Long restaurantId) throws Throwable {
         for (Long imageId : imageIds) {
             persistImageAndAssociateToRestaurant(imageId, restaurantId);
         }

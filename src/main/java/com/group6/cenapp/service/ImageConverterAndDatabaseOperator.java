@@ -1,12 +1,16 @@
 package com.group6.cenapp.service;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Service;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 
+
+@Service
 public class ImageConverterAndDatabaseOperator {
 
     public byte[] convertImageToBytes(File imageFile) {
