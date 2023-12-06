@@ -17,13 +17,11 @@ public class ImagesController {
     public ImagesController(ImageRepository imageRepository) {
         this.imageRepository = imageRepository;
     }
-
     @PostMapping
     public ResponseEntity<Image> create(@RequestBody Image image) throws IOException {
-        imageRepository.save();
+        imageRepository.save(image);
         return ResponseEntity.ok(image);
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<Image> getImage(@PathVariable Long id) {
         Optional<Image> imageOptional = imageRepository.findById(id);

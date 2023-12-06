@@ -33,7 +33,7 @@ public class ImageService {
     }
 
     private void persistImageAndAssociateToRestaurant(Long imageId, Long restaurantId) throws Throwable {
-        Image image = (Image) imageRepository.findById(imageId).orElseThrow(() -> new ResourceNotFoundException("Image not found"));
+        Image image = imageRepository.findById(imageId).orElseThrow(() -> new ResourceNotFoundException("Image not found"));
 
         byte[] imageBytes = imageConverter.convertImageToBytes(new File(Arrays.toString(image.getImage())));
 

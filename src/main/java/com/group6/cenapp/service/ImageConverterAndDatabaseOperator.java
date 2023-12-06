@@ -1,34 +1,25 @@
 package com.group6.cenapp.service;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 
 
-@Service
-public class ImageConverterAndDatabaseOperator {
+    @Service
+    public class ImageConverterAndDatabaseOperator {
 
-    public byte[] convertImageToBytes(File imageFile) {
-        BufferedImage bufferedImage = null;
-        try {
-            bufferedImage = ImageIO.read(imageFile);
-        } catch (IOException e) {
-            e.printStackTrace();
+        public byte[] convertImageToBytes(File imageFile) throws IOException {
+            BufferedImage bufferedImage = ImageIO.read(imageFile);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "jpg", baos);
+            return baos.toByteArray();
         }
-
-        if (bufferedImage == null) {
-            return null;
-        }
-
-        byte[] imageBytes = null;
-        imageBytes = IOUtils.toByteArray(String.valueOf(bufferedImage));
-        return imageBytes;
-    }
 
     public void persistImageBytesInDatabase(byte[] imageBytes, String databaseUrl, String tableName) {
         Connection connection = null;
