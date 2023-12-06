@@ -1,6 +1,6 @@
 package com.group6.cenapp.repository;
 
-import com.group6.cenapp.model.entity.Category;
+import com.group6.cenapp.model.entity.FoodType;
 import com.group6.cenapp.model.entity.Restaurant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>, PagingAndSortingRepository<Restaurant, Integer> {
-    List<Restaurant> getByCategory(Category category);
+    List<Restaurant> getByFoodTypesIn(List<FoodType> foodTypes);
     @Query(value = "select R.* from city R where R.city_id = ?1", nativeQuery = true)
     List<Restaurant> getByCity(Integer city_id);
     @Query(value = "select P.* from restaurant P where P.id not in (select distinct R.restaurant from reservation R where (R.checkout_date >= ?1 and R.check_in_date <= ?2));", nativeQuery = true)

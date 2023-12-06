@@ -1,7 +1,9 @@
 package com.group6.cenapp.service;
 
-import com.group6.cenapp.model.entity.Category;
+import com.group6.cenapp.exception.BadRequestException;
+import com.group6.cenapp.model.entity.FoodType;
 import com.group6.cenapp.model.entity.Restaurant;
+import com.group6.cenapp.repository.FoodTypeRepository;
 import com.group6.cenapp.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,9 @@ public class RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
+    @Autowired
+    private FoodTypeRepository foodTypeRepository;
+
 
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
@@ -27,17 +32,26 @@ public class RestaurantService {
         return restaurantRepository.findAll(pageable);
     }
 
-    public List<Restaurant> getRestaurantByCategory(Category category) {
-        return restaurantRepository.getByCategory(category);
+    public List<Restaurant> getRestaurantByFoodType(List<FoodType> foodType) {
+        return restaurantRepository.getByFoodTypesIn(foodType);
     }
-
     public Optional<Restaurant> getRestaurantById(Integer id) {
         return restaurantRepository.findById(id);
     }
 
 
 
-    public Restaurant saveRestaurant(Restaurant restaurant) {
+    public Restaurant saveRestaurant(Restaurant restaurant) throws BadRequestException {
+        FoodType foodType = new FoodType();
+        if(restaurant.getFoodTypes() == null) {
+            if(foodType.getFood_type_id() == null || foodType.getFood_type_id() <= 0){
+                throw new BadRequestException("Debe ingresar un tipo de comida válido");
+            }
+            throw new BadRequestException("Debe ingresar un tipo de comida");
+        }
+        foodType.setFood_type_id(restaurant.getFoodTypes().get(0).getFood_type_id());
+        foodTypeRepository.save(foodType);
+
         return restaurantRepository.save(restaurant);
     }
 

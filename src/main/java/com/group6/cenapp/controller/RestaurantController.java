@@ -1,9 +1,9 @@
 package com.group6.cenapp.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.group6.cenapp.model.entity.Category;
+import com.group6.cenapp.exception.BadRequestException;
+import com.group6.cenapp.model.entity.FoodType;
 import com.group6.cenapp.model.entity.Restaurant;
-import com.group6.cenapp.repository.CategoryRepository;
 import com.group6.cenapp.response.ApiResponseHandler;
 import com.group6.cenapp.service.RestaurantService;
 import jakarta.validation.Valid;
@@ -30,8 +30,6 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @GetMapping
     public ResponseEntity<List<Restaurant>> listRestaurant() {
@@ -57,8 +55,8 @@ public class RestaurantController {
     }
 
     @GetMapping("/category/{id}")
-    public ResponseEntity<List<Restaurant>> searchRestaurantByCategory(@PathVariable Category category) {
-        List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCategory(category);
+    public ResponseEntity<List<Restaurant>> searchRestaurantByFoodType(@PathVariable List<FoodType> id) {
+        List<Restaurant> restaurantSearches = restaurantService.getRestaurantByFoodType(id);
          if(!restaurantSearches.isEmpty()){
             return ResponseEntity.ok(restaurantSearches);
         } else {
@@ -68,7 +66,7 @@ public class RestaurantController {
 
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<Restaurant> createRestaurant(@Valid @RequestBody Restaurant restaurant) {
+    public ResponseEntity<Restaurant> createRestaurant(@Valid @RequestBody Restaurant restaurant) throws BadRequestException {
         return ResponseEntity.ok(restaurantService.saveRestaurant(restaurant));
     }
 
@@ -95,7 +93,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/city/{id}")
-    public ResponseEntity<List<Restaurant>> searchRestaurantByCategory(@PathVariable Integer id) {
+    public ResponseEntity<List<Restaurant>> searchRestaurantByFoodType(@PathVariable Integer id) {
         List<Restaurant> restaurantSearches = restaurantService.getRestaurantByCity(id);
         if(!restaurantSearches.isEmpty()){
             return ResponseEntity.ok(restaurantSearches);

@@ -44,16 +44,16 @@ public class SecurityConfig {
                         "v1/api/restaurants/{id}",
                         "/v1/api/restaurants/delete/{id}",
                         "/v1/api/restaurants/update",
-                        "/v1/api/categories",
+                        "/v1/api/foodtypes",
                         "/auth/check-jwt",
                         "/auth/get-user/*",
                         "/auth/check-email/*",
-
-                        "/v1/api/categories/{id}",
+                        "/v1/api/foodtypes/{id}",
                         "/v1/api/cities",
                         "/v1/api/cities/{id}",
                         "/v1/api/countries",
-                        "/v1/api/countries/{id_country}/cities")
+                        "/v1/api/countries/{id_country}/cities",
+                        "/v1/api/restaurants/category/{id}")
 
                 .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
@@ -61,8 +61,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests().requestMatchers("/auth/user/**").authenticated()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/auth/admin/**",
-                        "/v1/api/categories/create",
-                        "/v1/api/categories/update",
+                        "/v1/api/foodtypes/create",
+                        "/v1/api/foodtypes/update",
                         "/v1/api/reservations").authenticated()
                 .and()
                 .sessionManagement()

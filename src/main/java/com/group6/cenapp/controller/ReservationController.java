@@ -6,7 +6,6 @@ import com.group6.cenapp.model.entity.Reservation;
 import com.group6.cenapp.model.entity.UserInfo;
 import com.group6.cenapp.repository.UserInfoRepository;
 import com.group6.cenapp.service.ReservationService;
-import com.group6.cenapp.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +25,6 @@ public class ReservationController  {
     private ReservationService reservationService;
     @Autowired
     private UserInfoRepository userInfoRepository;
-    @Autowired
-    private RestaurantService tableService;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
