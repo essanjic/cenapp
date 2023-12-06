@@ -25,4 +25,8 @@ public class UserInfo {
     @NonNull
     private String password;
     private String roles;
+    @JoinColumn(name = "id_city", nullable = false, foreignKey = @ForeignKey(name = "FK_user_city"))
+    private Integer id_city;
+    private String image;
+
 }

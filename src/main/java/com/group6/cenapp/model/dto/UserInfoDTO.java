@@ -11,4 +11,5 @@ public class UserInfoDTO {
     private String roles;
     private String name;
     private String last_name;
+    private String image;
 }

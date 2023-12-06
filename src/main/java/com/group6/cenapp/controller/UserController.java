@@ -12,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,8 +69,6 @@ public class UserController {
         }
     }
 
-
-
     @GetMapping("/authenticate")
     private Authentication authenticateUser(@RequestBody AuthRequest authRequest) {
         return authenticationManager.authenticate(
@@ -102,11 +99,11 @@ public class UserController {
 
         System.out.println(token);
         try {
-            String username = jwtService.extractUsername(token);
-            System.out.println(username);
-            if(!username.isEmpty()){
-                System.out.println(username);
-                UserInfo userInfo = service.getUserInfo(username);
+            String email = jwtService.extractUsername(token);
+            System.out.println(email);
+            if(!email.isEmpty()){
+                System.out.println(email);
+                UserInfo userInfo = service.getUserInfo(email);
                 return new ResponseEntity<>(userInfo,HttpStatus.OK);
             }
         } catch (Exception e) {
@@ -114,7 +111,6 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 
 
 }

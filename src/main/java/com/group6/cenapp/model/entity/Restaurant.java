@@ -2,6 +2,7 @@ package com.group6.cenapp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,12 +53,14 @@ public class Restaurant implements Serializable {
     private String hse_policy;
     @Column(name = "site_policy")
     private String site_policy;
-    @ManyToOne
-    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "FK_restaurant_category"))
-    private Category category;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurant_id", foreignKey = @ForeignKey(name = "FK_restaurant_food_type"))
+    private List<FoodType> foodTypes;
     @JoinColumn(name = "city_id", nullable = false, foreignKey = @ForeignKey(name = "FK_restaurant_city"))
     private Integer city_id;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurant_id")
+    private List<RestaurantTable> restaurant_tables;
     @Column(name = "image")
     private String image;
-
 }
