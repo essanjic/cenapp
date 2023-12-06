@@ -26,20 +26,29 @@ public class ImageService {
         this.imageConverter = imageConverter;
     }
 
-    public void associateImagesToRestaurant(List<Long> imageIds, Long restaurantId) throws Throwable {
-        for (Long imageId : imageIds) {
+    public void associateImagesToRestaurant(List<Integer> imageIds, Integer restaurantId) throws Throwable {
+        for (Integer imageId : imageIds) {
             persistImageAndAssociateToRestaurant(imageId, restaurantId);
         }
     }
 
-    private void persistImageAndAssociateToRestaurant(Long imageId, Long restaurantId) throws Throwable {
+    private void persistImageAndAssociateToRestaurant(Integer imageId, Integer restaurantId) throws Throwable {
         Image image = (Image) imageRepository.findById(imageId).orElseThrow(() -> new ResourceNotFoundException("Image not found"));
 
-        byte[] imageBytes = imageConverter.convertImageToBytes(new File(Arrays.toString(image.getImage())));
+        byte[] imageBytes = imageConverter.convertImageToBytes(new File(Arrays.toString(image.getImages())));
 
         Restaurant restaurant = restaurantRepository.findById(Math.toIntExact(restaurantId)).orElseThrow(() -> new ResourceNotFoundException("Restaurant not found"));
         restaurant.setImage(Arrays.toString(imageBytes));
         restaurantRepository.save(restaurant);
+    }
+
+    public List<Image> listImages() {
+        return imageRepository.findAll();
+    }
+
+    public Image saveImage(Image image) {
+
+        return imageRepository.save(image);
     }
 }
 
