@@ -27,13 +27,10 @@ public class Reservation {
     private LocalDate check_in_date;
     private LocalDate checkout_date;
     private String comments;
-
-    @ManyToOne
     @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurantId;
-
+    @Column(name="restaurant_id", nullable = false)
+    private Integer restaurantId;
     @ManyToOne
     @JoinColumn(name = "user_info")
     private UserInfo user;
-
 }

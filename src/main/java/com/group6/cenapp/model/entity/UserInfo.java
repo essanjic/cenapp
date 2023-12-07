@@ -1,21 +1,20 @@
 package com.group6.cenapp.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "user_info")
 public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     @Column(name = "last_name")
     private String last_name;
@@ -29,4 +28,7 @@ public class UserInfo {
     private Integer id_city;
     private String image;
 
+    public UserInfo(Integer id) {
+        this.id = id;
+    }
 }

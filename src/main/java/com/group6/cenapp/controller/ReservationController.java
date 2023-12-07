@@ -54,11 +54,14 @@ public class ReservationController  {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Reservation reservation)  {
-        UserInfo user = userInfoRepository.findById(reservation.getUser().getId()).orElse(null);
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El Usuario no se encuentra debe Ingresar o Registrarse  para poder hacer una reserva ");
+        Optional<UserInfo> user;
+        user = userInfoRepository.findById(reservation.getUser().getId());
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El Usuario no se encuentra...");
         } else {
-            return ResponseEntity.ok(reservationService.saveReservation(reservation));
+            reservation.setUser(user.get());
+            reservationService.saveReservation(reservation);
+            return ResponseEntity.ok("Se creo su reserva con ID: " + reservation.getId());
         }
     }
 

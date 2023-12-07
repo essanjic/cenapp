@@ -53,12 +53,17 @@ public class SecurityConfig {
                         "/v1/api/cities/{id}",
                         "/v1/api/countries",
                         "/v1/api/countries/{id_country}/cities",
-                        "/v1/api/restaurants/category/{id}")
+                        "/v1/api/restaurants/category/{id}",
+                        "/v1/api/reservations/{id}")
 
                 .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/auth/user/**").authenticated()
+                .authorizeHttpRequests().requestMatchers("/auth/user/**",
+                        "/v1/api/reservations/create",
+                        "/v1/api/reservations/update",
+                        "/v1/api/reservations/delete/{id}"
+                ).authenticated()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/auth/admin/**",
                         "/v1/api/foodtypes/create",
