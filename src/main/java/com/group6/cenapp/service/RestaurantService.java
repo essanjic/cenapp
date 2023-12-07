@@ -40,7 +40,6 @@ public class RestaurantService {
     }
 
 
-
     public Restaurant saveRestaurant(Restaurant restaurant) throws BadRequestException {
         FoodType foodType = new FoodType();
         if(restaurant.getFoodTypes() == null) {

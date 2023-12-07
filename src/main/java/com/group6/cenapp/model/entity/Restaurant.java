@@ -1,11 +1,11 @@
 package com.group6.cenapp.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.io.Serializable;
 import java.util.List;
@@ -36,6 +36,7 @@ public class Restaurant implements Serializable {
     private String email;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
+    @BatchSize(size = 50)
     private List<DailyAvailability> day_disponibility;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_restaurant", foreignKey = @ForeignKey(name = "FK_restaurant_category_restaurant"))
@@ -62,4 +63,6 @@ public class Restaurant implements Serializable {
     private List<RestaurantTable> restaurant_tables;
     @Column(name = "image")
     private String image;
+    @JoinColumn(name = "user_email", nullable = false, foreignKey = @ForeignKey(name = "FK_restaurant_user"))
+    private String user_email;
 }
