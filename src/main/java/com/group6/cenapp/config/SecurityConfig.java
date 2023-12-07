@@ -55,7 +55,7 @@ public class SecurityConfig {
                         "/v1/api/countries/{id_country}/cities",
                         "/v1/api/restaurants/category/{id}",
                         "/auth/toggle-fav/{userId}/{restId}",
-                        "auth/get-fav/{userId}")
+                        "/auth/get-fav/{userId}")
                 .permitAll()
                 .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
                 .and()
