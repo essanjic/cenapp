@@ -21,9 +21,9 @@ public class ImageController {
     private ImageService imageService;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadImage(@RequestParam("nombre") String nombre, @RequestParam("archivo") MultipartFile archivo) {
+    public ResponseEntity<String> uploadImage(@RequestParam("name") String name, @RequestParam("contain") MultipartFile contain) {
         try {
-            Image image = imageService.guardarImagen(nombre, archivo);
+            Image image = imageService.saveImage(name, contain);
             return ResponseEntity.ok("Imagen subida con éxito. ID: " + image.getImage_id());
         } catch (IOException e) {
             return ResponseEntity.badRequest().body("Error al subir la imagen.");

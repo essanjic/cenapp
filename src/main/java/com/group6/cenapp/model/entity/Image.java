@@ -19,5 +19,6 @@ public class Image {
     private Integer image_id;
     private String name;
     @Lob
+    @Column(length=100000)
     private byte[] contain;
 }

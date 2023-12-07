@@ -15,7 +15,7 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    public Image guardarImagen(String nombre, MultipartFile archivo) throws IOException {
+    public Image saveImage(String nombre, MultipartFile archivo) throws IOException {
         byte[] bytes = archivo.getBytes();
         Image image = new Image();
         image.setName(nombre);
