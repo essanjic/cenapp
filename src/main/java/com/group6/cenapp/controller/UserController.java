@@ -1,7 +1,9 @@
 package com.group6.cenapp.controller;
 
 import com.group6.cenapp.exception.RegisterErrorException;
+import com.group6.cenapp.exception.ResourceNotFoundException;
 import com.group6.cenapp.model.entity.AuthRequest;
+import com.group6.cenapp.model.entity.Restaurant;
 import com.group6.cenapp.model.entity.UserInfo;
 import com.group6.cenapp.service.JwtService;
 import com.group6.cenapp.service.UserInfoService;
@@ -16,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -69,6 +72,11 @@ public class UserController {
         }
     }
 
+    @PostMapping("/updateUser")
+    public ResponseEntity<UserInfo> updateUserInfo(@RequestBody UserInfo userInfo) throws ResourceNotFoundException {
+        UserInfo foundUser = service.updateUserInfo(userInfo);
+        return new ResponseEntity<>(foundUser,HttpStatus.OK);
+    }
     @GetMapping("/authenticate")
     private Authentication authenticateUser(@RequestBody AuthRequest authRequest) {
         return authenticationManager.authenticate(
@@ -112,5 +120,17 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+
+    @GetMapping("/toggle-fav/{userId}/{restId}")
+    public ResponseEntity<List<Integer>> toggleFavourite(@PathVariable Integer userId, @PathVariable Integer restId) throws ResourceNotFoundException {
+        List<Integer> favList = service.toggleFav(userId,restId);
+        return new ResponseEntity<>(favList, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-fav/{userId}")
+    public ResponseEntity<List<Restaurant>> getFavourites(@PathVariable Integer userId) throws ResourceNotFoundException {
+        List<Restaurant> restaurantList = service.getRestFavs(userId);
+        return new ResponseEntity<>(restaurantList, HttpStatus.OK);
+    }
 
 }

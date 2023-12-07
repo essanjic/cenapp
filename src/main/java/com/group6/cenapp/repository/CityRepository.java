@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CityRepository extends JpaRepository<City, Integer> {
-    @Query(value="SELECT c FROM city c WHERE id_country =?1", nativeQuery = true)
+    @Query("SELECT c FROM City c WHERE c.id_country.id_country = ?1")
     List<City> findAllByCountryId(Integer id_country);
 }

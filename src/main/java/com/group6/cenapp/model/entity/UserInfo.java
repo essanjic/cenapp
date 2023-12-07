@@ -1,16 +1,19 @@
 package com.group6.cenapp.model.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "user_info")
+@Getter
+@Setter
 public class UserInfo {
 
     @Id
@@ -25,8 +28,12 @@ public class UserInfo {
     @NonNull
     private String password;
     private String roles;
+    @ElementCollection
+    @Nullable
+    private List<Integer> favourites = new ArrayList<>();
     @JoinColumn(name = "id_city", nullable = false, foreignKey = @ForeignKey(name = "FK_user_city"))
     private Integer id_city;
     private String image;
-
+    @Nullable
+    private Integer id_country;
 }

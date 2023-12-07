@@ -1,6 +1,7 @@
 package com.group6.cenapp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -61,6 +63,9 @@ public class Restaurant implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     private List<RestaurantTable> restaurant_tables;
-    @Column(name = "image")
-    private String image;
+    @Column(name = "logo")
+    private String logo;
+    @ElementCollection
+    @Nullable
+    private List<String> images = new ArrayList<>();
 }
